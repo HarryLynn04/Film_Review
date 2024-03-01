@@ -24,4 +24,32 @@ def watchlist(request):
 
 def addAMovie(request):
     context_dict= {}
-    return render(request, 'ReviewFlix/AddAMovie.html', context=context_dict)   
+    return render(request, 'ReviewFlix/AddAMovie.html', context=context_dict)
+
+def genres(request):
+    context_dict= {}
+    return render(request, 'ReviewFlix/Genres.html', context=context_dict)
+
+def thriller(request):
+    context_dict= {}
+    return render(request, 'ReviewFlix/Thriller.html', context=context_dict) 
+
+def animated(request):
+    context_dict= {}
+    return render(request, 'ReviewFlix/Animated.html', context=context_dict)  
+
+def comedy(request):
+    context_dict= {}
+    return render(request, 'ReviewFlix/Comedy.html', context=context_dict)   
+
+def horror(request):
+    context_dict= {}
+    return render(request, 'ReviewFlix/Horror.html', context=context_dict)     
+
+def drama(request):
+    context_dict= {}
+    return render(request, 'ReviewFlix/Drama.html', context=context_dict)                                         
+
+def documentary(request):
+    context_dict= {}
+    return render(request, 'ReviewFlix/Documentary.html', context=context_dict)                                                                                                 

@@ -10,5 +10,11 @@ urlpatterns = [
     path('register/', views.register, name='Register'),
     path('watchlist/', views.watchlist, name='Watchlist'),
     path('addAMovie/', views.addAMovie, name='AddAMovie'),
-    
+    path('genres/', views.genres, name='Genres'),
+    path('thriller/', views.thriller, name='Thriller'),
+    path('animated/', views.animated, name='Animated'),
+    path('comedy/', views.comedy, name='Comedy'),
+    path('horror/', views.horror, name='Horror'),
+    path('drama/', views.drama, name='Drama'),
+    path('documentary/', views.documentary, name='Documentary'),
 ]
