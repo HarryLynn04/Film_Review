@@ -6,6 +6,20 @@
 
 {% block body_block %}
     <h1>Welcome to the Genres Page</h1>
+    <p>Here you can find a list of all the genres available on ReviewFlix</p>
+    <ul>
+        <li><a href="{% url 'ReviewFlix:Drama'%}">Drama</a></li>
+        <li><a href="{% url 'ReviewFlix:Comedy'%}">Comedy</a></li>
+        <li><a href="{% url 'ReviewFlix:Horror'%}">Horror</a></li>
+        <li><a href="{% url 'ReviewFlix:Thriller'%}">Thriller</a></li>
+        <li><a href="{% url 'ReviewFlix:Documentary'%}">Documentary</a></li>
+        <li><a href="{% url 'ReviewFlix:Animated'%}">Animated</a></li>
+
+
+        
+    </ul>
+
+
 {% endblock %}
 
 
