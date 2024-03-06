@@ -1,9 +1,25 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Register</title>
-    </head>
-    <body>
-        <h1>hello this is the register page</h1>
-    </body>
-</html>
+{% extends 'ReviewFlix/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Register
+{% endblock %}
+
+{% block body_block %}
+    <h1>Register for ReviewFlix</h1>
+    {% if registered %}
+        <strong>thank you for registering!</strong>
+        <a href="{% url 'ReviewFlix:Home' %}">Return to the homepage.</a><br />
+    {% else %}
+        <strong>register here!</strong><br />
+        <form id="user_form" method="post" action="{% url 'ReviewFlix:Register' %}"
+        enctype="multipart/form-data">
+
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ profile_form.as_p }}
+<!-- Provide a button to click to submit the form. -->
+            <input type="submit" name="submit" value="Register" />
+        </form>
+    {% endif %}
+{% endblock %}
