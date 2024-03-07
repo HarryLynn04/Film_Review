@@ -1,0 +1,15 @@
+{% extends 'ReviewFlix/base.html' %}
+
+{% block title_block %}
+    {{ film.Title}}
+{% endblock %}
+
+{% block body_block %}
+    <h1>{{ film.Title }}</h1>
+    <p><strong>Genre:</strong> {{ film.Genre }}</p>
+    <p><strong>Description:</strong> {{ film.Description }}</p>
+    <p><strong>Release Date:</strong> {{ film.ReleaseDate }}</p>
+    <p><strong>Director:</strong> {{ film.Director }}</p>
+    <p><strong>Cast:</strong> {{ film.Cast }}</p>
+{% endblock %}
+

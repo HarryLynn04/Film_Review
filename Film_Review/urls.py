@@ -19,5 +19,6 @@ urlpatterns = [
     path('documentary/', views.documentary, name='Documentary'),
     path('register/', views.register, name='Register'),
     path('login/', views.user_login, name='Login'),
+    path('film/<int:film_id>/', views.individual_film, name='Film'),
 
 ]

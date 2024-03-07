@@ -4,6 +4,7 @@ from Film_Review.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login
 from django.urls import reverse
 from django.shortcuts import redirect
+from Film_Review.models import Film
 
 
 
@@ -37,27 +38,33 @@ def genres(request):
     return render(request, 'ReviewFlix/Genres.html', context=context_dict)
 
 def thriller(request):
-    context_dict= {}
+    films = Film.objects.filter(Genre='thriller')
+    context_dict= {'films': films}
     return render(request, 'ReviewFlix/Thriller.html', context=context_dict) 
 
 def animated(request):
-    context_dict= {}
+    films = Film.objects.filter(Genre='animated')
+    context_dict= {'films': films}
     return render(request, 'ReviewFlix/Animated.html', context=context_dict)  
 
 def comedy(request):
-    context_dict= {}
+    films = Film.objects.filter(Genre='comedy')
+    context_dict= {'films': films}
     return render(request, 'ReviewFlix/Comedy.html', context=context_dict)   
 
 def horror(request):
-    context_dict= {}
+    films = Film.objects.filter(Genre='horror')
+    context_dict= {'films': films}
     return render(request, 'ReviewFlix/Horror.html', context=context_dict)     
 
 def drama(request):
-    context_dict= {}
+    films = Film.objects.filter(Genre='drama')
+    context_dict= {'films': films}
     return render(request, 'ReviewFlix/Drama.html', context=context_dict)                                         
 
 def documentary(request):
-    context_dict= {}
+    films = Film.objects.filter(Genre='documentary')
+    context_dict= {'films': films}
     return render(request, 'ReviewFlix/Documentary.html', context=context_dict)  
 
 def register(request):
@@ -109,4 +116,9 @@ def user_login(request):
             print(f"Invalid login details: {username}, {password}")
             return HttpResponse("Invalid login details supplied.")
     else:
-        return render(request, 'ReviewFlix/Login.html')                                                                                             
+        return render(request, 'ReviewFlix/Login.html')     
+    
+def individual_film(request, film_id):
+    film = Film.objects.get(id=film_id)
+    context_dict = {'film': film}
+    return render(request, 'ReviewFlix/Film.html', context=context_dict)                                                                                        

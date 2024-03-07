@@ -1,9 +1,17 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Thriller</title>
-    </head>
-    <body>
-        <h1>hello this is the thriller page</h1>
-    </body>
-</html>
+{% extends 'ReviewFlix/base.html' %}
+
+{% block title_block %}
+    Thriller
+{% endblock %}
+
+{% block body_block %}
+    <h1>Welcome to the Thriller Movies Page</h1>
+
+    <ul>
+        {% for film in films %}
+            <li><a href="{% url "ReviewFlix:Film" film.id %}">{{ film.Title }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+
