@@ -68,13 +68,14 @@ def register(request):
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save(commit=False)
             user.set_password(user_form.cleaned_data['password'])
+            user.email = (user_form.cleaned_data['email'])
             user.save()
 
             profile = profile_form.save(commit=False)
             profile.user = user
             profile.firstName = profile_form.cleaned_data['firstName']
             profile.lastName = profile_form.cleaned_data['lastName']
-            profile.isProducer = user_form.cleaned_data.get('isProducer', False)
+            profile.isProducer = profile_form.cleaned_data.get('isProducer', False)
             profile.save()
 
             registered = True
