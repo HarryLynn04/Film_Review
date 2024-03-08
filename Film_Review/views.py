@@ -68,7 +68,7 @@ def register(request):
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save(commit=False)
             user.set_password(user_form.cleaned_data['password'])
-            user.email = (user_form.cleaned_data['email'])
+            user.email(user_form.cleaned_data['email'])
             user.save()
 
             profile = profile_form.save(commit=False)
