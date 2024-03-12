@@ -1,18 +1,27 @@
 {% extends 'ReviewFlix/base.html' %}
-{% load staticfiles %}
 
 {% block title_block %}
     Login
 {% endblock %}
 
 {% block body_block %}
-    <h1>Login to ReviewFlix</h1>
-    <form id="login_form" method="post" action="{% url 'ReviewFlix:Login' %}">
-        {% csrf_token %}
-        Username: <input type="text" name="username" value="" size="50" />
-        <br />
-        Password: <input type="password" name="password" value="" size="50" />
-        <br />
-        <input type="submit" value="submit" />
-    </form>
+    <div style="background-color: white; width: 50%; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px;">
+        <h1 style="text-align: center;">Login to ReviewFlix</h1>
+        <form id="login_form" method="post" action="{% url 'ReviewFlix:Login' %}">
+            {% csrf_token %}
+            <div style="text-align: center;">
+                <label for="username">Username:</label>
+                <input type="text" name="username" value="" size="50" />
+            </div>
+            <br />
+            <div style="text-align: center;">
+                <label for="password">Password:</label>
+                <input type="password" name="password" value="" size="50" />
+            </div>
+            <br />
+            <div style="text-align: center;">
+                <input type="submit" value="Submit" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; cursor: pointer;">
+            </div>
+        </form>
+    </div>
 {% endblock %}

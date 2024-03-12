@@ -9,37 +9,73 @@
         Base Page
       {% endblock %}
     </title>
+    <style>
+      /* Header styles */
+      header {
+        background-color: #333;
+        padding: 10px 0;
+        text-align: center;
+        color: white;
+      }
+      header ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      header ul li {
+        display: inline;
+        margin-right: 20px;
+      }
+      header ul li a {
+        color: white;
+        text-decoration: none;
+      }
+      
+      /* Footer styles */
+      footer {
+        background-color: #333;
+        padding: 10px 0;
+        text-align: center;
+        color: white;
+      }
+      footer ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      footer ul li {
+        display: inline;
+        margin-right: 20px;
+      }
+      footer ul li a {
+        color: white;
+        text-decoration: none;
+      }
+    </style>
   </head>
   <body>
-    <div>
-        <ul>
-          <ul>
-            <li><a href="{% url 'ReviewFlix:Home' %}">Homepage</a></li>
-            <li><a href="{% url 'ReviewFlix:Genres' %}">Genres</a></li>
-            {% if user.is_authenticated %}
-                <li><a href="{% url 'ReviewFlix:Watchlist' %}">Watchlist</a></li>
-                <li><a href="{% url 'ReviewFlix:Logout' %}">Logout</a></li>  <!-- Fix the href attribute -->
-            {% else %}
-                <li><a href="{% url 'ReviewFlix:Register' %}">Register</a></li>
-                <li><a href="{% url 'ReviewFlix:Login' %}">Login</a></li>
-            {% endif %}                
-        </ul>
-      </div>
+    <header>
+      <ul>
+        <li><a href="{% url 'ReviewFlix:Home' %}">Homepage</a></li>
+        <li><a href="{% url 'ReviewFlix:Genres' %}">Genres</a></li>
+        {% if user.is_authenticated %}
+          <li><a href="{% url 'ReviewFlix:Watchlist' %}">Watchlist</a></li>
+          <li><a href="{% url 'ReviewFlix:Logout' %}">Logout</a></li>
+        {% else %}
+          <li><a href="{% url 'ReviewFlix:Register' %}">Register</a></li>
+          <li><a href="{% url 'ReviewFlix:Login' %}">Login</a></li>
+        {% endif %}
+      </ul>
+    </header>
     <hr/>
     <div>
       {% block body_block %}
       {% endblock %}
     </div>
     <hr/>
-    <div>
-        <ul>
-            <li><a href="{% url 'ReviewFlix:AddAMovie' %}">Add a Movie</a></li>
-            <li><a href="{% url 'ReviewFlix:FAQ' %}">FAQs</a></li>
-        </ul>
-    </div>
-
-
-    
-
+    <footer>
+      <ul>
+        <li><a href="{% url 'ReviewFlix:AddAMovie' %}">Add a Movie</a></li>
+        <li><a href="{% url 'ReviewFlix:FAQ' %}">FAQs</a></li>
+      </ul>
+    </footer>
   </body>
 </html>
