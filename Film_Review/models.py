@@ -35,7 +35,14 @@ class UserProfile(models.Model):
 
     
 class Review(models.Model):
-    Rating = models.IntegerField()
+    RATINGS = [
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+    ]
+    Rating = models.IntegerField(choices=RATINGS)
     Likes = models.IntegerField()
     DatePublished = models.DateField()
     Description = models.CharField(max_length=1000)
