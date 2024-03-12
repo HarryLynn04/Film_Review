@@ -13,16 +13,16 @@
   <body>
     <div>
         <ul>
-          <li><a href="{% url 'ReviewFlix:Home' %}">Homepage</a></li>
-          <li><a href="{% url 'ReviewFlix:Genres' %}">Genres</a></li>
-          {% if user.is_authenticated %}
-            <li><a href="{% url 'ReviewFlix:Watchlist' %}">Watchlist</a></li>
-            <li><a href="{% url 'ReviewFlix:Logout' %}">Logout/a></li>
-          {% else %}
-            <li><a href="{% url 'ReviewFlix:Register' %}">Register</a></li>
-            <li><a href="{% url 'ReviewFlix:Login' %}">Login</a></li>
-          {% endif %}         
-          
+          <ul>
+            <li><a href="{% url 'ReviewFlix:Home' %}">Homepage</a></li>
+            <li><a href="{% url 'ReviewFlix:Genres' %}">Genres</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'ReviewFlix:Watchlist' %}">Watchlist</a></li>
+                <li><a href="{% url 'ReviewFlix:Logout' %}">Logout</a></li>  <!-- Fix the href attribute -->
+            {% else %}
+                <li><a href="{% url 'ReviewFlix:Register' %}">Register</a></li>
+                <li><a href="{% url 'ReviewFlix:Login' %}">Login</a></li>
+            {% endif %}                
         </ul>
       </div>
     <hr/>

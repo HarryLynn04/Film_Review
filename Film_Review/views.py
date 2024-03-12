@@ -115,7 +115,7 @@ def user_login(request):
 @login_required
 def user_logout(request):
     logout(request)
-    return redirect(reverse('rango:index'))   
+    return redirect(reverse('ReviewFlix:Home'))   
     
 def individual_film(request, film_id):
     film = Film.objects.get(id=film_id)
