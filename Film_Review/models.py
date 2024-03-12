@@ -35,7 +35,6 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     firstName = models.CharField(max_length=30,blank=True)
     lastName = models.CharField(max_length=150,blank=True)
-    email = models.EmailField()
     isProducer = models.BooleanField(default=False)
 
     def __str__(self):
