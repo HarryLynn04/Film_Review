@@ -22,4 +22,5 @@ urlpatterns = [
     path('', views.home, name = 'Home'),
     path('ReviewFlix/', include('Film_Review.urls')),
     path('admin/', admin.site.urls),
+
 ]

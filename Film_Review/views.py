@@ -1,9 +1,11 @@
+from datetime import timezone
 from django.shortcuts import render
 from django.http import HttpResponse
-from Film_Review.forms import UserForm, UserProfileForm
+from Film_Review.forms import ReviewForm, UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login
 from django.urls import reverse
 from django.shortcuts import redirect
+# from django.contrib.auth.decorators import login_required
 from Film_Review.models import Film
 
 
@@ -117,7 +119,31 @@ def individual_film(request, film_id):
     return render(request, 'ReviewFlix/Film.html', context=context_dict)   
 
 
+# @login_required
+# def review_for_film(request, film_id):
+#     film = Film.objects.get(id=film_id)
+#     context_dict = {'film': film}
+#     return render(request, 'ReviewFlix/Review.html', context=context_dict) 
+
+
+
 def review_for_film(request, film_id):
     film = Film.objects.get(id=film_id)
-    context_dict = {'film': film}
-    return render(request, 'ReviewFlix/Review.html', context=context_dict)
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.Film = film
+            review.Username = request.user
+            review.Likes = 0  
+            review.DatePublished = timezone.now().date()
+            review.save()
+            return redirect('ReviewFlix:Film', film_id=film_id) 
+    else:
+        form = ReviewForm()
+
+    context = {
+        'film': film,
+        'form': form
+    }
+    return render(request, 'ReviewFlix/Review.html', context)

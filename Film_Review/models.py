@@ -23,13 +23,13 @@ class Film(models.Model):
     
     
     
-#class Review(models.Model):
-    #Rating = models.IntegerField()
-    #Likes = models.IntegerField()
-    #DatePublished = models.DateField()
-    #Description = models.CharField(max_length=1000)
-    #Film = models.ForeignKey(Film, on_delete=models.CASCADE)
-    #Username = models.ForeignKey(User, on_delete=models.CASCADE)
+class Review(models.Model):
+    Rating = models.IntegerField()
+    Likes = models.IntegerField()
+    DatePublished = models.DateField()
+    Description = models.CharField(max_length=1000)
+    Film = models.ForeignKey(Film, on_delete=models.CASCADE)
+    Username = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
