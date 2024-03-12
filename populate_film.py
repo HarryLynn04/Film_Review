@@ -256,6 +256,11 @@ def populate():
     ]
     for film in films_data:
         Film.objects.get_or_create(**film)
+    
+    shawshank_film = Film.objects.get(Title='The Shawshank Redemption')
+
+    shawshank_film.image = 'film_images/shawshank.jpg'
+    shawshank_film.save()
 
 if __name__ == '__main__':
     print('Starting Film population script...')

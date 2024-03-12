@@ -11,5 +11,8 @@
     <p><strong>Release Date:</strong> {{ film.ReleaseDate }}</p>
     <p><strong>Director:</strong> {{ film.Director }}</p>
     <p><strong>Cast:</strong> {{ film.Cast }}</p>
+    {% if film.image %}
+        <img src="{{ film.image.url }}" alt="{{ film.Title }} Image">
+    {% endif %}
 {% endblock %}
 
