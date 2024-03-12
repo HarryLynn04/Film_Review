@@ -2,10 +2,10 @@ from datetime import timezone
 from django.shortcuts import render
 from django.http import HttpResponse
 from Film_Review.forms import ReviewForm, UserForm, UserProfileForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.shortcuts import redirect
-# from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 from Film_Review.models import Film
 
 
@@ -110,7 +110,12 @@ def user_login(request):
             print(f"Invalid login details: {username}, {password}")
             return HttpResponse("Invalid login details supplied.")
     else:
-        return render(request, 'ReviewFlix/Login.html')     
+        return render(request, 'ReviewFlix/Login.html')  
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect(reverse('rango:index'))   
     
 def individual_film(request, film_id):
     film = Film.objects.get(id=film_id)
