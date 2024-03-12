@@ -14,7 +14,24 @@
     {% if film.image %}
         <img src="{{ film.image.url }}" alt="{{ film.Title }} Image">
     {% endif %}
-{% endblock %}
+    <h2>Reviews:</h2>
+    {% if reviews %}
+        <p>Average Rating: {{ average_rating }}</p>
+        <ul>
+            {% for review in reviews %}
+                <li>
+                    <p>Author: {{ review.Username }}</p>
+                    <p>Rating: {{ review.Rating }}</p>
+                    <p>Description: {{ review.Description }}</p>
+                    <p>Published on: {{ review.DatePublished }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No reviews available for this film.</p>
+    {% endif %}
+
+
     <a href="{% url 'ReviewFlix:FilmReview' film_id=film.id %}">Write a Review</a>
-    {% endblock %}
+{% endblock %}
 

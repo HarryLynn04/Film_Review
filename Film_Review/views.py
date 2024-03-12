@@ -1,4 +1,4 @@
-from datetime import timezone
+from django.utils import timezone
 from django.shortcuts import render
 from django.http import HttpResponse
 from Film_Review.forms import ReviewForm, UserForm, UserProfileForm
@@ -6,7 +6,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-from Film_Review.models import Film
+from Film_Review.models import Film, Review
+from django.db.models import Avg
+
 
 
 
@@ -119,7 +121,10 @@ def user_logout(request):
     
 def individual_film(request, film_id):
     film = Film.objects.get(id=film_id)
-    context_dict = {'film': film}
+    reviews = Review.objects.filter(Film=film)
+    average_rating = reviews.aggregate(Avg('Rating'))['Rating__avg']
+    
+    context_dict = {'film': film, "reviews": reviews, "average_rating": average_rating}
     return render(request, 'ReviewFlix/Film.html', context=context_dict)   
 
 
