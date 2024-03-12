@@ -11,5 +11,6 @@
     <p><strong>Release Date:</strong> {{ film.ReleaseDate }}</p>
     <p><strong>Director:</strong> {{ film.Director }}</p>
     <p><strong>Cast:</strong> {{ film.Cast }}</p>
-{% endblock %}
+    <a href="{% url 'ReviewFlix:FilmReview' film_id=film.id %}">Write a Review</a>
+    {% endblock %}
 
