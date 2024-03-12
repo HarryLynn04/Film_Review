@@ -15,4 +15,6 @@
         <img src="{{ film.image.url }}" alt="{{ film.Title }} Image">
     {% endif %}
 {% endblock %}
+    <a href="{% url 'ReviewFlix:FilmReview' film_id=film.id %}">Write a Review</a>
+    {% endblock %}
 

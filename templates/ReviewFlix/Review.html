@@ -1,0 +1,36 @@
+{% extends 'ReviewFlix/base.html' %}
+
+{% block title_block %}
+    Review
+{% endblock %}
+
+
+{% block body_block %}
+<div class="container mt-4">
+    <h1>Review for "{{ film.Title }}"</h1>
+    <p>Write your review about the film {{ film.Title }}</p>
+
+    <p>Description:</p>
+    <p>Description of the film</p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        
+
+        <div class="text-formatting">
+            <button type="button" onclick="formatText('bold')"><strong>B</strong></button>
+            <button type="button" onclick="formatText('italic')"><em>I</em></button>
+            <button type="button" onclick="formatText('underline')"><u>U</u></button>
+            <button type="button" onclick="formatText('spoiler')">SPOILER!</button>
+        </div>
+        <button type="submit" class="submit-btn">Submit Review</button>
+
+        
+    
+    </form>
+</div>
+{% endblock %}
+
+

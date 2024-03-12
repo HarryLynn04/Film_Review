@@ -19,5 +19,7 @@ urlpatterns = [
     path('register/', views.register, name='Register'),
     path('login/', views.user_login, name='Login'),
     path('film/<int:film_id>/', views.individual_film, name='Film'),
+    path('film/<int:film_id>/review/', views.review_for_film, name='FilmReview'),
+
 
 ]
