@@ -1,25 +1,26 @@
 {% extends 'ReviewFlix/base.html' %}
-{% load staticfiles %}
 
 {% block title_block %}
     Register
 {% endblock %}
 
 {% block body_block %}
-    <h1>Register for ReviewFlix</h1>
-    {% if registered %}
-        <strong>thank you for registering!</strong>
-        <a href="{% url 'ReviewFlix:Home' %}">Return to the homepage.</a><br />
-    {% else %}
-        <strong>register here!</strong><br />
-        <form id="user_form" method="post" action="{% url 'ReviewFlix:Register' %}"
-        enctype="multipart/form-data">
-
-            {% csrf_token %}
-            {{ user_form.as_p }}
-            {{ profile_form.as_p }}
-<!-- Provide a button to click to submit the form. -->
-            <input type="submit" name="submit" value="Register" />
-        </form>
-    {% endif %}
+    <div style="background-color: white; width: 50%; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px;">
+        <h1 style="text-align: center;">Register for ReviewFlix</h1>
+        {% if registered %}
+            <strong style="text-align: center; display: block;">Thank you for registering!</strong>
+            <div style="text-align: center;">
+                <a href="{% url 'ReviewFlix:Home' %}" style="color: blue;">Return to the homepage.</a><br />
+            </div>
+        {% else %}
+            <strong style="text-align: center; display: block;">Register here!</strong><br />
+            <form id="user_form" method="post" action="{% url 'ReviewFlix:Register' %}" enctype="multipart/form-data" style="text-align: center;">
+                {% csrf_token %}
+                {{ user_form.as_p }}
+                {{ profile_form.as_p }}
+                <br />
+                <input type="submit" name="submit" value="Register" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; cursor: pointer;">
+            </form>
+        {% endif %}
+    </div>
 {% endblock %}
