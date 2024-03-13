@@ -49,6 +49,114 @@
         color: white;
         text-decoration: none;
       }
+
+      /* Body styling */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f8f8;
+      }
+
+      /* Container styles */
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Header styling */
+      h1 {
+        color: #333;
+      }
+
+      /* Film info styling */
+      p {
+        color: #666;
+        margin-bottom: 10px;
+      }
+
+      strong {
+        color: #000;
+      }
+
+      /* Image styling */
+      img {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Reviews styling */
+      h2 {
+        margin-top: 30px;
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      container ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      container li {
+        margin-bottom: 20px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      }
+
+      a {
+        color: #007bff;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      /* Reviews styling */
+      .review-container {
+        margin-top: 30px;
+      }
+
+      .review {
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        margin-bottom: 20px;
+      }
+
+      .review-author {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .review-rating {
+        color: #007bff;
+        margin-bottom: 5px;
+      }
+
+      .review-description {
+        color: #666;
+        margin-bottom: 5px;
+      }
+
+      .review-date {
+        color: #999;
+        font-size: 0.9em;
+      }
+
+      .no-reviews {
+        color: #666;
+      }
     </style>
   </head>
   <body>
@@ -67,8 +175,11 @@
     </header>
     <hr/>
     <div>
+      <div class="container">
+
       {% block body_block %}
       {% endblock %}
+  
     </div>
     <hr/>
     <footer>

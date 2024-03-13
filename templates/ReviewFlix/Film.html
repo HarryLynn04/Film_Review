@@ -15,23 +15,28 @@
         <img src="{{ film.image.url }}" alt="{{ film.Title }} Image">
     {% endif %}
     <h2>Reviews:</h2>
+    <div class = "review-container">
     {% if reviews %}
         <p>Average Rating: {{ average_rating }}</p>
         <ul>
             {% for review in reviews %}
-                <li>
-                    <p>Author: {{ review.Username }}</p>
-                    <p>Rating: {{ review.Rating }}</p>
-                    <p>Description: {{ review.Description }}</p>
-                    <p>Published on: {{ review.DatePublished }}</p>
-                </li>
+            <div class="review">
+                    <p class ="review-author">Author: {{ review.Username }}</p>
+                    <p class ="review-rating">Rating: {{ review.Rating }}</p>
+                    <p class ="review-description">Description: {{ review.Description }}</p>
+                    <p ckass ="review-likes">Likes: {{ review.Likes }} </p>
+                    <p class ="review-date">Published on: {{ review.DatePublished }}</p>
+                    <button class ="like-btn" data-review-id="{{ review.id }}">Like</button>
+            </div>
             {% endfor %}
         </ul>
     {% else %}
-        <p>No reviews available for this film.</p>
+        <p class ="no-reviews">No reviews available for this film.</p>
     {% endif %}
+    </div>
 
 
     <a href="{% url 'ReviewFlix:FilmReview' film_id=film.id %}">Write a Review</a>
+
 {% endblock %}
 
