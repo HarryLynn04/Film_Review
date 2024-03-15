@@ -37,6 +37,15 @@
 
     <a href="{% url 'ReviewFlix:FilmReview' film_id=film.id %}">Write a Review</a>
 
+
+    {% if user.is_authenticated %}
+        <form method="post" action="{% url 'ReviewFlix:add_to_watchlist' %}">
+            {% csrf_token %}
+            <input type="hidden" name="film_id" value="{{ film.id }}">
+            <input type="submit" value="Add to Watchlist">
+        </form>
+    {% endif %}
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
     $(document).ready(function() {

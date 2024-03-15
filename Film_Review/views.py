@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-from Film_Review.models import Film, Review
+from Film_Review.models import Film, Review, Watchlist
 from django.db.models import Avg
 from .models import Review
 
@@ -15,8 +15,6 @@ from .models import Review
 
 def home(request):
     top_films = Film.objects.annotate(avg_rating=Avg("review__Rating")).order_by("-avg_rating")[:5]
-            
-
     context_dict= {"top_films": top_films}
     return render(request, 'ReviewFlix/Home.html', context=context_dict)
 
@@ -25,8 +23,10 @@ def faq(request):
     context_dict= {}
     return render(request, 'ReviewFlix/FAQ.html', context=context_dict)
 
+@login_required
 def watchlist(request):
-    context_dict= {}
+    watchlist_entries = Watchlist.objects.filter(Username=request.user)
+    context_dict= {'watchlist_entries': watchlist_entries}
     return render(request, 'ReviewFlix/Watchlist.html', context=context_dict)
 
 def addAMovie(request):
@@ -160,6 +160,19 @@ def review_for_film(request, film_id):
         'form': form
     }
     return render(request, 'ReviewFlix/Review.html', context)
+
+
+@login_required
+def add_to_watchlist(request):
+    if request.method == 'POST':
+        film_id = request.POST.get('film_id')
+        user = request.user
+        film = Film.objects.get(id=film_id)
+
+        Watchlist.objects.get_or_create(Username=user, Film=film)
+        return redirect('ReviewFlix:Film', film_id=film_id)
+    else:
+        return redirect('ReviewFlix:Home')
 
 def like_review(request):
     if request.method == 'POST'and request.is_ajax():
