@@ -43,7 +43,7 @@ class Review(models.Model):
         (5, '5'),
     ]
     Rating = models.IntegerField(choices=RATINGS)
-    likes = models.IntegerField(default=0)
+    Likes = models.IntegerField(default=0)
     DatePublished = models.DateField()
     Description = models.CharField(max_length=1000)
     Film = models.ForeignKey(Film, on_delete=models.CASCADE)
@@ -55,6 +55,5 @@ class Review(models.Model):
         """
         self.Likes += 1
         self.save()
-    
     
     
