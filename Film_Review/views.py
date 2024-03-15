@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-from Film_Review.models import Film, Review
+from Film_Review.models import Film, Like, Review
 from django.db.models import Avg
 from .models import Review
 
@@ -139,7 +139,7 @@ def individual_film(request, film_id):
 #     return render(request, 'ReviewFlix/Review.html', context=context_dict) 
 
 
-
+@login_required
 def review_for_film(request, film_id):
     film = Film.objects.get(id=film_id)
     if request.method == 'POST':
@@ -148,7 +148,7 @@ def review_for_film(request, film_id):
             review = form.save(commit=False)
             review.Film = film
             review.Username = request.user
-            review.Likes = 0  
+            review.likes = 0  
             review.DatePublished = timezone.now().date()
             review.save()
             return redirect('ReviewFlix:Film', film_id=film_id) 
@@ -161,6 +161,7 @@ def review_for_film(request, film_id):
     }
     return render(request, 'ReviewFlix/Review.html', context)
 
+<<<<<<< HEAD
 def like_review(request):
     if request.method == 'POST'and request.is_ajax():
         review_id = request.POST.get('review_id')  
@@ -172,3 +173,22 @@ def like_review(request):
     else:
 
         return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
+=======
+@login_required
+def like_review(request):
+    if request.method == 'POST' and request.is_ajax():
+        review_id = request.POST.get('review_id')
+        review = get_object_or_404(Review, id=review_id)
+        user = request.user
+
+        if Like.objects.filter(user=user, review=review).exists():
+            return JsonResponse({'status': 'error', 'message': 'You have already liked this review.'})
+        review.likes += 1
+        review.save()
+
+        Like.objects.create(user=user, review=review)
+
+        return JsonResponse({'status': 'success', 'new_likes': review.likes})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request'})
+>>>>>>> c223172c562ce60167600099c78c482f0c3765e6
