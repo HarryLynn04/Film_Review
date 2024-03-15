@@ -1,4 +1,5 @@
 from django.utils import timezone
+from django.contrib import messages
 from django.shortcuts import render
 from django.http import HttpResponse
 from Film_Review.forms import ReviewForm, UserForm, UserProfileForm
@@ -128,16 +129,12 @@ def individual_film(request, film_id):
     return render(request, 'ReviewFlix/Film.html', context=context_dict)   
 
 
-# @login_required
-# def review_for_film(request, film_id):
-#     film = Film.objects.get(id=film_id)
-#     context_dict = {'film': film}
-#     return render(request, 'ReviewFlix/Review.html', context=context_dict) 
 
-
-
+@login_required
 def review_for_film(request, film_id):
     film = Film.objects.get(id=film_id)
+    
+
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():

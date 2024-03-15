@@ -12,6 +12,10 @@
     </title>
 
     <link rel = "stylesheet", href = "{% static 'css/base.css' %}">
+    {% block javascript %}
+      <script src="{% static 'js/script.js' %}"></script>
+    {% endblock %}
+    
   </head>
   <body>
     <div>
@@ -40,8 +44,6 @@
             <li><a href="{% url 'ReviewFlix:FAQ' %}">FAQs</a></li>
         </ul>
     </div>
-
-    
 
   </body>
 </html>
