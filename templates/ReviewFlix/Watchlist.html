@@ -9,6 +9,16 @@
 
 {% block body_block %}
     <h1>Welcome to the Watchlist Page</h1>
+
+    <ul>
+        {% for entry in watchlist_entries %}
+            <li>
+                <a href="{% url 'ReviewFlix:Film' film_id=entry.Film.id %}">{{ entry.Film.Title }}</a>
+            </li>
+        {% empty %}
+            <p>No movies in your watchlist.</p>
+        {% endfor %}
+    </ul>
 {% endblock %}
 
 
