@@ -22,8 +22,10 @@ def faq(request):
     context_dict= {}
     return render(request, 'ReviewFlix/FAQ.html', context=context_dict)
 
+@login_required
 def watchlist(request):
-    context_dict= {}
+    watchlist_entries = Watchlist.objects.filter(Username=request.user)
+    context_dict= {'watchlist_entries': watchlist_entries}
     return render(request, 'ReviewFlix/Watchlist.html', context=context_dict)
 
 def addAMovie(request):
