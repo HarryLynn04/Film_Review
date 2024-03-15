@@ -13,6 +13,8 @@
     <p>Description:</p>
     <p>Description of the film</p>
 
+
+
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
@@ -20,17 +22,23 @@
         
 
         <div class="text-formatting">
-            <button type="button" id="bold" class="btn btn-default"><strong>Bold</strong></button>
             <button type="button" onclick="formatText('bold')"><strong>B</strong></button>
             <button type="button" onclick="formatText('italic')"><em>I</em></button>
             <button type="button" onclick="formatText('underline')"><u>U</u></button>
             <button type="button" onclick="formatText('spoiler')">SPOILER!</button>
+            <button onclick="displayFormattedReview()">Display Review</button>
+
+            <div id="formattedText" style="border: 1px solid #ccc; padding: 10px; margin-top: 10px;"></div>
+
         </div>
         <button type="submit" class="submit-btn">Submit Review</button>
-
+        <div id="formattedText"></div
     
     </form>
 
+
+    
+  
 </div>
 {% endblock %}
 

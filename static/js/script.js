@@ -1,30 +1,59 @@
 
+
 function formatText(command) {
-    var textArea = document.getElementById('id_Description'); // Replace with the correct ID of your textarea
+    var textArea = document.getElementById('id_Description');
     var start = textArea.selectionStart;
     var end = textArea.selectionEnd;
-    var selectedText = textArea.value.substring(start, end);
-    
-    var beforeText = textArea.value.substring(0, start);
-    var afterText = textArea.value.substring(end);
+    var text = textArea.value;
+    var tag = '';
 
-    if (command === 'bold') {
-        textArea.value = beforeText + '<strong>' + selectedText + '</strong>' + afterText;
-    } else if (command === 'italic') {
-        textArea.value = beforeText + '<em>' + selectedText + '</em>' + afterText;
-    } else if (command === 'underline') {
-        textArea.value = beforeText + '<u>' + selectedText + '</u>' + afterText;
+    switch (command) {
+        case 'bold':
+            tag = 'b';
+            break;
+        case 'italic':
+            tag = 'i';
+            break;
+        case 'underline':
+            tag = 'u';
+            break;
+
+        case 'spoiler':
+            tagOpen = "<span class='spoiler' onclick='toggleSpoiler(this)' style='background-color: black; color: black; cursor: pointer;'>";
+            tagClose = "</span>";
+            break;
+        // Add more cases as needed
     }
 
-    textArea.selectionStart = start;
-    textArea.selectionEnd = start + selectedText.length + 7; 
+    var beforeText = text.substring(0, start);
+    var selectedText = text.substring(start, end);
+    var afterText = text.substring(end);
+    var tagOpen = '<' + tag + '>';
+    var tagClose = '</' + tag + '>';
+
+    textArea.value = beforeText + tagOpen + selectedText + tagClose + afterText;
+
+    // Adjust cursor position to after the closing tag
+    var newPos = start + tagOpen.length + selectedText.length + tagClose.length;
+    textArea.setSelectionRange(newPos, newPos);
+}
+
+function displayFormattedReview() {
+    var textArea = document.getElementById('id_Description');
+    var formattedTextDiv = document.getElementById('formattedText');
+
+    // Convert newline characters to <br> tags for proper HTML rendering
+    var htmlContent = textArea.value.replace(/\n/g, '<br>');
+
+    // Set the innerHTML of the display element to interpret the HTML tags
+    formattedTextDiv.innerHTML = htmlContent;
 }
 
 
-document.getElementById('descriptionTextarea').addEventListener('select', function(event) {
-    var start = event.target.selectionStart;
-    var end = event.target.selectionEnd;
-    var selectedText = event.target.value.substring(start, end);
-
-    console.log('Selected text:', selectedText);
-});
+function toggleSpoiler(element) {
+    if (element.style.color === "black") {
+        element.style.color = "white"; // Makes the text visible against a black background
+    } else {
+        element.style.color = "black"; // Hides the text again
+    }
+}
