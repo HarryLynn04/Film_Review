@@ -1,6 +1,6 @@
 from django.utils import timezone
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponse, JsonResponse
 from Film_Review.forms import ReviewForm, UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
@@ -8,6 +8,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from Film_Review.models import Film, Review
 from django.db.models import Avg
+from .models import Review
 
 
 
@@ -156,3 +157,15 @@ def review_for_film(request, film_id):
         'form': form
     }
     return render(request, 'ReviewFlix/Review.html', context)
+
+def like_review(request):
+    if request.method == 'POST'and request.is_ajax():
+        review_id = request.POST.get('review_id')  
+        review = get_object_or_404(Review, id=review_id)
+        review.likes += 1
+        review.save()
+        
+        return JsonResponse({'status': 'success', 'new_likes': review.likes})
+    else:
+
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method'})

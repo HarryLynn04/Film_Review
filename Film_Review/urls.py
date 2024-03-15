@@ -21,6 +21,5 @@ urlpatterns = [
     path('logout/', views.user_logout, name='Logout'),
     path('film/<int:film_id>/', views.individual_film, name='Film'),
     path('film/<int:film_id>/review/', views.review_for_film, name='FilmReview'),
-
-
+     path('like_review/', views.like_review, name='like_review'),
 ]
