@@ -8,7 +8,6 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from Film_Review.models import Film, Like, Review
 from django.db.models import Avg
-from .models import Review
 
 
 
@@ -161,19 +160,6 @@ def review_for_film(request, film_id):
     }
     return render(request, 'ReviewFlix/Review.html', context)
 
-<<<<<<< HEAD
-def like_review(request):
-    if request.method == 'POST'and request.is_ajax():
-        review_id = request.POST.get('review_id')  
-        review = get_object_or_404(Review, id=review_id)
-        review.likes += 1
-        review.save()
-        
-        return JsonResponse({'status': 'success', 'new_likes': review.likes})
-    else:
-
-        return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
-=======
 @login_required
 def like_review(request):
     if request.method == 'POST' and request.is_ajax():
@@ -191,4 +177,3 @@ def like_review(request):
         return JsonResponse({'status': 'success', 'new_likes': review.likes})
     else:
         return JsonResponse({'status': 'error', 'message': 'Invalid request'})
->>>>>>> c223172c562ce60167600099c78c482f0c3765e6
