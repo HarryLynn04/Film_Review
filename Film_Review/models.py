@@ -49,6 +49,12 @@ class Review(models.Model):
     Film = models.ForeignKey(Film, on_delete=models.CASCADE)
     Username = models.ForeignKey(User, on_delete=models.CASCADE)
     
+    def like_review(self):
+        """
+        Method to increment the likes of a review by one.
+        """
+        self.Likes += 1
+        self.save()
     
     
     
