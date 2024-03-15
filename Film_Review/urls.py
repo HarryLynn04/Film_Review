@@ -16,11 +16,10 @@ urlpatterns = [
     path('horror/', views.horror, name='Horror'),
     path('drama/', views.drama, name='Drama'),
     path('documentary/', views.documentary, name='Documentary'),
-    path('register/', views.register, name='Register'),
     path('login/', views.user_login, name='Login'),
     path('logout/', views.user_logout, name='Logout'),
     path('film/<int:film_id>/', views.individual_film, name='Film'),
     path('film/<int:film_id>/review/', views.review_for_film, name='FilmReview'),
-
+    path('like_review/', views.like_review, name='like_review'),
 
 ]

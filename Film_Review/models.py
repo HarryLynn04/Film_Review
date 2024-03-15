@@ -43,18 +43,21 @@ class Review(models.Model):
         (5, '5'),
     ]
     Rating = models.IntegerField(choices=RATINGS)
-    Likes = models.IntegerField(default=0)
     DatePublished = models.DateField()
+    likes = models.IntegerField(default=0)
     Description = models.CharField(max_length=1000)
     Film = models.ForeignKey(Film, on_delete=models.CASCADE)
     Username = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Review for {self.Film.Title} by {self.Username.username}"
     
-    def like_review(self):
-        """
-        Method to increment the likes of a review by one.
-        """
-        self.Likes += 1
-        self.save()
+class Like(models.Model):
+    review = models.ForeignKey(Review, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ['review', 'user']
     
     
     
