@@ -19,6 +19,17 @@
         <li><a href="{% url 'ReviewFlix:Register' %}">Register Here!</a></li>
         <li><a href="{% url 'ReviewFlix:Login' %}">Login Here!</a></li>
     {% endif %}
+    {% if top_films %}
+    <h2>Top 5 Highest Rated Films:</h2>
+    <ul>
+        {% for film in top_films %}
+            <li>{{ film.Title }} - Average Rating: {{ film.avg_rating }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No films found.</p>
+    {% endif %}
+
 {% endblock %}
 
 

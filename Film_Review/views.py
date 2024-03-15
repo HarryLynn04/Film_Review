@@ -13,7 +13,10 @@ from django.db.models import Avg
 
 
 def home(request):
-    context_dict= {}
+    top_films = Film.objects.annotate(avg_rating=Avg("review__Rating")).order_by("-avg_rating")[:5]
+            
+
+    context_dict= {"top_films": top_films}
     return render(request, 'ReviewFlix/Home.html', context=context_dict)
 
 # Create your views here.
