@@ -6,14 +6,15 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-from Film_Review.models import Film, Review
+from Film_Review.models import Film, Review, Watchlist
 from django.db.models import Avg
 
 
 
 
 def home(request):
-    context_dict= {}
+    top_films = Film.objects.annotate(avg_rating=Avg("review__Rating")).order_by("-avg_rating")[:5]
+    context_dict= {"top_films": top_films}
     return render(request, 'ReviewFlix/Home.html', context=context_dict)
 
 # Create your views here.
@@ -156,3 +157,16 @@ def review_for_film(request, film_id):
         'form': form
     }
     return render(request, 'ReviewFlix/Review.html', context)
+
+
+@login_required
+def add_to_watchlist(request):
+    if request.method == 'POST':
+        film_id = request.POST.get('film_id')
+        user = request.user
+        film = Film.objects.get(id=film_id)
+
+        Watchlist.objects.get_or_create(Username=user, Film=film)
+        return redirect('ReviewFlix:Film', film_id=film_id)
+    else:
+        return redirect('ReviewFlix:Home')

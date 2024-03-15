@@ -57,4 +57,9 @@ class Review(models.Model):
         self.save()
     
     
-    
+class Watchlist(models.Model):
+    Username = models.ForeignKey(User, on_delete=models.CASCADE)
+    Film = models.ForeignKey(Film, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('Username', 'Film',)
