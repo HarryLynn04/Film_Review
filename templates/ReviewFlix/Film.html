@@ -5,46 +5,51 @@
 {% endblock %}
 
 {% block body_block %}
-    <h1>{{ film.Title }}</h1>
-    <p><strong>Genre:</strong> {{ film.Genre }}</p>
-    <p><strong>Description:</strong> {{ film.Description }}</p>
-    <p><strong>Release Date:</strong> {{ film.ReleaseDate }}</p>
-    <p><strong>Director:</strong> {{ film.Director }}</p>
-    <p><strong>Cast:</strong> {{ film.Cast }}</p>
-    {% if film.image %}
-        <img src="{{ film.image.url }}" alt="{{ film.Title }} Image">
-    {% endif %}
-    <h2>Reviews:</h2>
-    <div class="review-container">
-        {% if reviews %}
-            <p>Average Rating: {{ average_rating }}</p>
-            <ul>
-                {% for review in reviews %}
-                    <div class="review">
-                        <p class="review-author">Author: {{ review.Username }}</p>
-                        <p class="review-rating">Rating: {{ review.Rating }}</p>
-                        <p class="review-description">Description: {{ review.Description }}</p>
-                        <p class="review-likes">Likes: <span id="likes-count-{{ review.id }}">{{ review.likes }}</span></p>
-                        <p class="review-date">Published on: {{ review.DatePublished }}</p>
-                        <button class="like-btn" data-review-id="{{ review.id }}">Like</button>
-                    </div>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p class="no-reviews">No reviews available for this film.</p>
+    <div class="film-details-container">
+        <div class="film-details">
+            <h1>{{ film.Title }}</h1>
+            <p><strong>Genre:</strong> {{ film.Genre }}</p>
+            <p><strong>Description:</strong> {{ film.Description }}</p>
+            <p><strong>Release Date:</strong> {{ film.ReleaseDate }}</p>
+            <p><strong>Director:</strong> {{ film.Director }}</p>
+            <p><strong>Cast:</strong> {{ film.Cast }}</p>
+            <h2>Reviews:</h2>
+            <div class="review-container">
+                {% if reviews %}
+                    <p>Average Rating: {{ average_rating }}</p>
+                    <ul>
+                        {% for review in reviews %}
+                            <div class="review">
+                                <p class="review-author">Author: {{ review.Username }}</p>
+                                <p class="review-rating">Rating: {{ review.Rating }}</p>
+                                <p class="review-description">Description: {{ review.Description }}</p>
+                                <p class="review-likes">Likes: <span id="likes-count-{{ review.id }}">{{ review.likes }}</span></p>
+                                <p class="review-date">Published on: {{ review.DatePublished }}</p>
+                                <button class="like-btn" data-review-id="{{ review.id }}">Like</button>
+                            </div>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="no-reviews">No reviews available for this film.</p>
+                {% endif %}
+            </div>
+
+            <a href="{% url 'ReviewFlix:FilmReview' film_id=film.id %}">Write a Review</a>
+
+            {% if user.is_authenticated %}
+                <form method="post" action="{% url 'ReviewFlix:add_to_watchlist' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="film_id" value="{{ film.id }}">
+                    <input type="submit" value="Add to Watchlist">
+                </form>
+            {% endif %}
+        </div>
+        {% if film.image %}
+            <div class="film-image">
+                <img src="{{ film.image.url }}" alt="{{ film.Title }} Image">
+            </div>
         {% endif %}
     </div>
-
-    <a href="{% url 'ReviewFlix:FilmReview' film_id=film.id %}">Write a Review</a>
-
-
-    {% if user.is_authenticated %}
-        <form method="post" action="{% url 'ReviewFlix:add_to_watchlist' %}">
-            {% csrf_token %}
-            <input type="hidden" name="film_id" value="{{ film.id }}">
-            <input type="submit" value="Add to Watchlist">
-        </form>
-    {% endif %}
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>

@@ -157,6 +157,62 @@
       .no-reviews {
         color: #666;
       }
+
+      .film-details-container {
+        display: flex; /* Use flexbox */
+    }
+    
+    .film-details {
+        flex: 1; /* Grow to fill available space */
+    }
+    
+    .film-image {
+        margin-left: 20px; /* Adjust as needed */
+        max-width: 200px;
+        height: auto;
+    }
+
+    .genres-container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+  }
+  
+  .genres {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+  }
+  
+  .genre {
+      width: calc(33.33% - 20px); /* Three genres per row with margin */
+      margin: 10px;
+      text-align: center;
+  }
+  
+  .genre img {
+      max-width: 100%;
+      height: 200px;
+      object-fit: cover;
+  }
+  
+  .genre h3 {
+      margin-top: 10px;
+      font-size: 18px;
+  }
+  
+  .genre a {
+      text-decoration: none;
+      color: #333;
+      transition: color 0.3s ease;
+  }
+  
+  .genre a:hover {
+      color: #007bff; /* Change color on hover */
+  }
+  
+    
+
     </style>
   </head>
   <body>

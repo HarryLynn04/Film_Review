@@ -11,7 +11,6 @@
 
 {% block body_block %}
     <h1>Welcome to the HomePage</h1>
-    <p>Here you can find the latest reviews of the latest films</p>
     {% if user.is_authenticated %}
         Hey {{ user.username }}!
     {% else %}
@@ -19,6 +18,8 @@
         <li><a href="{% url 'ReviewFlix:Register' %}">Register Here!</a></li>
         <li><a href="{% url 'ReviewFlix:Login' %}">Login Here!</a></li>
     {% endif %}
+    <p>Here you can find the latest reviews of the latest films</p>
+
     {% if top_films %}
     <h2>Top 5 Highest Rated Films:</h2>
     <ul>
