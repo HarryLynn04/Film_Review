@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from Film_Review.models import Review, UserProfile
+from Film_Review.models import Review, UserProfile, Film
 
 
 class UserForm(forms.ModelForm):
@@ -32,3 +32,9 @@ class ReviewForm(forms.ModelForm):
             'Rating': 'Your Rating',
             'Description': 'Your Review',
         }
+        
+
+class FilmForm(forms.ModelForm):
+    class Meta:
+        model = Film
+        fields = ['Title', 'Genre', 'Description', 'ReleaseDate', 'Director', 'Cast', 'image']

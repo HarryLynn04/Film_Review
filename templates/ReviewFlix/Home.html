@@ -24,7 +24,7 @@
     <h2>Top 5 Highest Rated Films:</h2>
     <ul>
         {% for film in top_films %}
-            <li>{{ film.Title }} - Average Rating: {{ film.avg_rating }}</li>
+            <li>{{ film.Title }} - Average Rating: {{ film.avg_rating|floatformat:1}}</li>
         {% endfor %}
     </ul>
     {% else %}
