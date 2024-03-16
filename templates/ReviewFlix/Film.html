@@ -40,11 +40,51 @@
 
 
     {% if user.is_authenticated %}
-        <form method="post" action="{% url 'ReviewFlix:add_to_watchlist' %}">
+        <form id="watchlist-form" method="post" action="{% url 'ReviewFlix:add_to_watchlist' %}">
             {% csrf_token %}
             <input type="hidden" name="film_id" value="{{ film.id }}">
-            <input type="submit" value="Add to Watchlist">
+            <input type="submit" value="Add to Watchlist" id="watchlist-btn">
         </form>
     {% endif %}
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var filmId = "{{ film.id }}";
+            $.ajax({
+                type: "GET",
+                url: "/ReviewFlix/check_watchlist/",
+                data: { film_id: filmId },
+                success: function(response) {
+                    if (response.in_watchlist) {
+                        $("#watchlist-btn").val("Remove from Watchlist");
+                        $("#watchlist-form").attr("action", "{% url 'ReviewFlix:remove_from_watchlist' %}");
+                    } else {
+                        $("#watchlist-btn").val("Add to Watchlist");
+                        $("#watchlist-form").attr("action", "{% url 'ReviewFlix:add_to_watchlist' %}");
+                    }
+                }
+            });
+    
+            $("#watchlist-btn").click(function(e) {
+                e.preventDefault();
+                var form = $(this).closest("form");
+                var action = form.attr("action");
+                $.ajax({
+                    type: "POST",
+                    url: action,
+                    data: form.serialize(),
+                    success: function(response) {
+                        if ($("#watchlist-btn").val() === "Remove from Watchlist") {
+                            $("#watchlist-btn").val("Add to Watchlist");
+                            $("#watchlist-form").attr("action", "{% url 'ReviewFlix:add_to_watchlist' %}");
+                        } else {
+                            $("#watchlist-btn").val("Remove from Watchlist");
+                            $("#watchlist-form").attr("action", "{% url 'ReviewFlix:remove_from_watchlist' %}");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock %}
