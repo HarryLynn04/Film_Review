@@ -16,7 +16,7 @@
             <h2>Reviews:</h2>
             <div class="review-container">
                 {% if reviews %}
-                    <p>Average Rating: {{ average_rating }}</p>
+                    <p>Average Rating: {{ average_rating|floatformat:1 }}</p>
                     <ul>
                         {% for review in reviews %}
                             <div class="review">
