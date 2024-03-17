@@ -131,7 +131,6 @@
 
 
     <h1>Welcome to the HomePage</h1>
-    <p>Here you can find the latest reviews of the latest films</p>
     {% if user.is_authenticated %}
         Hey {{ user.username }}!
     {% else %}
@@ -140,17 +139,21 @@
         <li><a href="{% url 'ReviewFlix:Login' %}">Login Here!</a></li>
     {% endif %}
 
+
 {% block javascript %}
     {{ block.super }}
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     <script src="{% static 'js/carousel.js' %}"></script>
 {% endblock %}
   
+
+    <p>Here you can find the latest reviews of the latest films</p>
+
     {% if top_films %}
     <h2>Top 5 Highest Rated Films:</h2>
     <ul>
         {% for film in top_films %}
-            <li>{{ film.Title }} - Average Rating: {{ film.avg_rating }}</li>
+            <li>{{ film.Title }} - Average Rating: {{ film.avg_rating|floatformat:1}}</li>
         {% endfor %}
     </ul>
     {% else %}
