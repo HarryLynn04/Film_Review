@@ -9,7 +9,127 @@
     HomePage
 {% endblock %}
 
+{% block additional_css %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+{% endblock %}
+
+
+
 {% block body_block %}
+
+    <div class="wrapper">
+        <div class="description">
+            <h1 class="about">About ReviewFlix</h1>
+            <p class="paragraph">Lorem Ipsum is simply dummy text of the printing and typesetting industry... It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+            
+        </div>
+
+        <div class="screen_logo">
+            <img class="screen_img" src="{% static 'images/screen_logo.png' %}"/>
+        </div>
+
+    </div>
+
+   
+
+    <section id="image-carousel" class="splide" aria-label="Beautiful Images">
+        <div class="splide__track">
+                <ul class="splide__list">
+                    <li class="splide__slide">
+                        <div class="title_button">
+                            <h1 class="title">Top trending movies</h1>
+                            <h2 class="movie_title">Shawshank</h2>
+
+                            <a href="{% url 'ReviewFlix:Film' 15 %}" class="button">More details</a>
+                        </div>
+
+                        <img class="img_slide_bg" src="{% static 'images/shawshank.webp' %}"/>
+                    </li>
+
+                    <li class="splide__slide">
+                        <div class="title_button">
+                            <h1 class="title">Top trending movies</h1>
+                            <h2 class="movie_title">The Lion King</h2>
+
+                            <a href="{% url 'ReviewFlix:Film' 1 %}" class="button">More details</a>
+                        </div>
+                        <img class="img_slide_bg" src="{% static 'images/lion_king.jpeg' %}"/>
+
+
+                    </li>
+
+                    <li class="splide__slide">
+                        <div class="title_button">
+                            <h1 class="title">Top trending movies</h1>
+                            <h2 class="movie_title">Superbad</h2>
+                            <a href="{% url 'ReviewFlix:Film' 7 %}" class="button">More Details</a>
+
+
+                        </div>
+                            <img class="img_slide_bg" src="{% static 'images/superbad.jpeg' %}"/>
+
+                    </li>
+
+                    <li class="splide__slide">
+                        <div class="title_button">
+                            <h1 class="title">Top trending movies</h1>
+                            <h2 class="movie_title">Forrest Gump</h2>
+
+                            <a href="{% url 'ReviewFlix:Film' 11 %}" class="button">More details</a>
+
+                        </div>
+                        <img class="img_slide_bg" src="{% static 'images/forrest_gump.webp' %}"/>
+
+
+                    </li>
+
+                    <li class="splide__slide">
+                        <div class="title_button">
+                            <h1 class="title">Top trending movies</h1>
+                            <h2 class="movie_title">Dumb and Dumber</h2>
+
+                            <a href="{% url 'ReviewFlix:Film' 6 %}" class="button">More details</a>
+                        </div>
+                        <img class="img_slide_bg" src="{% static 'images/dumb_and_dumber.avif' %}"/>
+
+                    </li>
+                    
+                    
+                </ul>
+        </div>
+    </section>
+
+
+    <div class="review_section">
+        <div class="title_review">
+            <h1>Recommended films</h1>
+        </div>
+
+         
+        <div class="grid">
+            <div class="img_review">
+                <img class="img_slide" src="{% static 'images/pulp_fiction.jpeg' %}"/>
+                <a href="{% url 'ReviewFlix:Film' 26  %}review" class="button btn_reviews">Write review</a>
+
+            </div>
+
+            <div class="img_review">
+                <img class="img_slide" src="{% static 'images/get_out.jpg' %}"/>
+                <a href="{% url 'ReviewFlix:Film' 24 %}review" class="button btn_reviews">Write review</a>
+
+            </div>
+
+            <div class="img_review">
+                <img class="img_slide" src="{% static 'images/shawshank.jpg' %}"/>
+                <a href="{% url 'ReviewFlix:Film' 15 %}reviewgi" class="button btn_reviews">Write review</a>
+
+            </div>
+        </div>
+    </div>
+
+
+
     <h1>Welcome to the HomePage</h1>
     <p>Here you can find the latest reviews of the latest films</p>
     {% if user.is_authenticated %}
@@ -19,6 +139,13 @@
         <li><a href="{% url 'ReviewFlix:Register' %}">Register Here!</a></li>
         <li><a href="{% url 'ReviewFlix:Login' %}">Login Here!</a></li>
     {% endif %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script src="{% static 'js/carousel.js' %}"></script>
+{% endblock %}
+  
 {% endblock %}
 
 

@@ -1,0 +1,143 @@
+.wrapper{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 110px;
+  
+  }
+  .about{
+  
+    font-size: 44px;
+      text-align: left;
+      font-family: Gilroy, sans-serif;
+      margin: 0 100px;
+      font-weight: 800;
+  }
+  
+  .description{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .screen_img{
+    width: 480px;
+  }
+
+.paragraph{
+    margin-right: 120px;
+    font-family: Gilroy, sans-serif;
+    font-weight: 300;
+}
+
+.screen_logo{
+    width: 50%;
+}
+
+section.splide{
+    padding-top: 80px;
+    margin: -20px;
+}
+
+.splide__list{
+    background: #000;
+
+}
+
+.splide__list img {
+    margin: 0;
+    filter: brightness(50%);
+}
+
+.splide__slide{
+    position: relative;
+}
+
+
+
+.title_button{
+    
+    margin: 0;
+    position: absolute;
+    z-index: 1;
+    padding: 290px 0px 0px 207px;
+}
+
+.title{
+    color: #ffff;
+    font-size: 70px;
+    margin: 0;
+}
+
+.movie_title{
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: #fff;
+    font-size: 45px;
+}
+
+
+.button {
+    position: absolute;
+    background-color: #78bcc0;
+    color: #fcf7fa;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 10px 0px 10px;
+    min-height: 30px;
+    min-width: 120px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.4s linear;
+    
+
+}
+  
+.button:hover {
+    text-decoration: none;
+    background-color: #fcf7fa;
+    color: #78bcc0;
+
+}
+
+
+.img_slide_bg{
+    width: 1470px;
+    height: 630px;
+}
+
+.review_section{
+    padding-top: 140px;
+    display: flex;
+    flex-direction: column;
+    margin-right: -30px;
+}
+
+.grid{
+    display: flex;
+    padding-top: 50px;
+}
+
+.img_review{
+    display: flex;
+    flex-direction: row;
+    margin-right: 30px;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.title_review h1{
+    font-size: 70px;
+    text-align: center;
+}
+
+.img_slide{
+    width: 600px;
+    height: 600px;
+}
+
+.button.btn_reviews:hover{
+background-color:#a6f0fd;
+color: #363537;
+
+}

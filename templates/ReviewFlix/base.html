@@ -3,47 +3,72 @@
 
 <html>
   <head>
-    <meta charset="UTF-8">
     <title>
       ReviewFlix - 
       {% block title_block %}
         Base Page
       {% endblock %}
     </title>
-
     <link rel = "stylesheet", href = "{% static 'css/base.css' %}">
-    {% block javascript %}
-      <script src="{% static 'js/script.js' %}"></script>
-    {% endblock %}
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+
+    {% block additional_css %}{% endblock %}
     
+
+    {% block javascript %}{% endblock %}
   </head>
+
+
   <body>
-    <div>
+    <header>
+        <img class="logo_img" src="{% static 'images/logo.png' %}"/>
+
         <ul>
-          <ul>
-            <li><a href="{% url 'ReviewFlix:Home' %}">Homepage</a></li>
-            <li><a href="{% url 'ReviewFlix:Genres' %}">Genres</a></li>
-            {% if user.is_authenticated %}
-                <li><a href="{% url 'ReviewFlix:Watchlist' %}">Watchlist</a></li>
-                <li><a href="{% url 'ReviewFlix:Logout' %}">Logout</a></li>  <!-- Fix the href attribute -->
-            {% else %}
-                <li><a href="{% url 'ReviewFlix:Register' %}">Register</a></li>
-                <li><a href="{% url 'ReviewFlix:Login' %}">Login</a></li>
-            {% endif %}                
+          
+          <li><a href="{% url 'ReviewFlix:Home' %}">Homepage</a></li>
+          <li class="dropdown">
+            <a href="{% url 'ReviewFlix:Genres' %}">Genres</a>
+            <div class="dropdown-content">
+              <ul class="dropdown_list">
+                <li><a href="{% url 'ReviewFlix:Drama'%}">Drama</a></li>
+                <li><a href="{% url 'ReviewFlix:Comedy'%}">Comedy</a></li>
+                <li><a href="{% url 'ReviewFlix:Horror'%}">Horror</a></li>
+                <li><a href="{% url 'ReviewFlix:Thriller'%}">Thriller</a></li>
+                <li><a href="{% url 'ReviewFlix:Documentary'%}">Documentary</a></li>
+                <li><a href="{% url 'ReviewFlix:Animated'%}">Animated</a></li>
+              </ul>
+            </div>
+          </li>
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'ReviewFlix:Watchlist' %}">Watchlist</a></li>
+            <li><a id="authorised_lst" href="{% url 'ReviewFlix:Logout' %}">Logout</a></li>
+          {% else %}
+          <div class ="authorised_lst">
+            <li><a href="{% url 'ReviewFlix:Register' %}">Register</a></li>
+            <li><a href="{% url 'ReviewFlix:Login' %}">Login</a></li>
+          </div>
+            
+          {% endif %}
         </ul>
+        
+
+      
+    </header>
+  
+   <div class="about_block">
+      <div class="container">
+        
+        {% block body_block %}        
+        {% endblock %}
       </div>
-    <hr/>
-    <div>
-      {% block body_block %}
-      {% endblock %}
-    </div>
-    <hr/>
-    <div>
-        <ul>
-            <li><a href="{% url 'ReviewFlix:AddAMovie' %}">Add a Movie</a></li>
-            <li><a href="{% url 'ReviewFlix:FAQ' %}">FAQs</a></li>
-        </ul>
     </div>
 
+   
+    <footer>
+      <ul>
+        <li><a href="{% url 'ReviewFlix:AddAMovie' %}">Add a Movie</a></li>
+        <li><a href="{% url 'ReviewFlix:FAQ' %}">FAQs</a></li>
+      </ul>
+    </footer>
   </body>
 </html>
