@@ -38,67 +38,71 @@
                 <ul class="splide__list">
                     <li class="splide__slide">
                         <div class="title_button">
-                            <h1 class="title">Top trending movies</h1>
-                            <h2 class="movie_title">Shawshank</h2>
+                            <h1 class="title">Top 5 Highest Rated Films:</h1>
+                            <h2 class="movie_title">Schindler's List</h2>
 
-                            <a href="{% url 'ReviewFlix:Film' 15 %}" class="button">More details</a>
+                            <a href="{% url 'ReviewFlix:Film' 14 %}" class="button">More details</a>
                         </div>
 
-                        <img class="img_slide_bg" src="{% static 'images/shawshank.webp' %}"/>
+                        <img class="img_slide_bg" src="{% static 'images/schindlers_list.webp' %}"/>
                     </li>
 
                     <li class="splide__slide">
                         <div class="title_button">
-                            <h1 class="title">Top trending movies</h1>
+                            <h1 class="title">Top 5 Highest Rated Films:</h1>
+                            <h2 class="movie_title">Anchorman: The Legend of Ron Burgundy</h2>
+
+                            <a href="{% url 'ReviewFlix:Film' 9 %}" class="button">More details</a>
+                        </div>
+                        <img class="img_slide_bg" src="{% static 'images/anchorman.webp' %}"/>
+
+
+                    </li>
+
+                    <li class="splide__slide">
+                        <div class="title_button">
+                            <h1 class="title">Top 5 Highest Rated Films:</h1>
                             <h2 class="movie_title">The Lion King</h2>
+                            <a href="{% url 'ReviewFlix:Film' 1 %}" class="button">More Details</a>
 
-                            <a href="{% url 'ReviewFlix:Film' 1 %}" class="button">More details</a>
+
                         </div>
-                        <img class="img_slide_bg" src="{% static 'images/lion_king.jpeg' %}"/>
+                            <img class="img_slide_bg" src="{% static 'images/lion_king.jpeg' %}"/>
+
+                    </li>
+
+                    <li class="splide__slide">
+                        <div class="title_button">
+                            <h1 class="title">Top 5 Highest Rated Films:</h1>
+                            <h2 class="movie_title">Toy Story</h2>
+
+                            <a href="{% url 'ReviewFlix:Film' 2 %}" class="button">More details</a>
+
+                        </div>
+                        <img class="img_slide_bg" src="{% static 'images/toy_story.avif' %}"/>
 
 
                     </li>
 
                     <li class="splide__slide">
                         <div class="title_button">
-                            <h1 class="title">Top trending movies</h1>
-                            <h2 class="movie_title">Superbad</h2>
-                            <a href="{% url 'ReviewFlix:Film' 7 %}" class="button">More Details</a>
+                            <h1 class="title">Top 5 Highest Rated Films:</h1>
+                            <h2 class="movie_title">Finding Nemo</h2>
 
-
+                            <a href="{% url 'ReviewFlix:Film' 3 %}" class="button">More details</a>
                         </div>
-                            <img class="img_slide_bg" src="{% static 'images/superbad.jpeg' %}"/>
-
-                    </li>
-
-                    <li class="splide__slide">
-                        <div class="title_button">
-                            <h1 class="title">Top trending movies</h1>
-                            <h2 class="movie_title">Forrest Gump</h2>
-
-                            <a href="{% url 'ReviewFlix:Film' 11 %}" class="button">More details</a>
-
-                        </div>
-                        <img class="img_slide_bg" src="{% static 'images/forrest_gump.webp' %}"/>
-
-
-                    </li>
-
-                    <li class="splide__slide">
-                        <div class="title_button">
-                            <h1 class="title">Top trending movies</h1>
-                            <h2 class="movie_title">Dumb and Dumber</h2>
-
-                            <a href="{% url 'ReviewFlix:Film' 6 %}" class="button">More details</a>
-                        </div>
-                        <img class="img_slide_bg" src="{% static 'images/dumb_and_dumber.avif' %}"/>
+                        <img class="img_slide_bg" src="{% static 'images/findingnemo.webp' %}"/>
 
                     </li>
                     
                     
                 </ul>
+
+               
         </div>
     </section>
+
+
 
 
     <div class="review_section">
@@ -122,7 +126,7 @@
 
             <div class="img_review">
                 <img class="img_slide" src="{% static 'images/shawshank.jpg' %}"/>
-                <a href="{% url 'ReviewFlix:Film' 15 %}reviewgi" class="button btn_reviews">Write review</a>
+                <a href="{% url 'ReviewFlix:Film' 15 %}review" class="button btn_reviews">Write review</a>
 
             </div>
         </div>
