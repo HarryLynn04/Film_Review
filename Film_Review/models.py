@@ -43,12 +43,20 @@ class Review(models.Model):
         (5, '5'),
     ]
     Rating = models.IntegerField(choices=RATINGS)
-    Likes = models.IntegerField()
     DatePublished = models.DateField()
+    likes = models.IntegerField(default=0)
     Description = models.CharField(max_length=1000)
     Film = models.ForeignKey(Film, on_delete=models.CASCADE)
     Username = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Review for {self.Film.Title} by {self.Username.username}"
     
-    
+class Like(models.Model):
+    review = models.ForeignKey(Review, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ['review', 'user']
     
     

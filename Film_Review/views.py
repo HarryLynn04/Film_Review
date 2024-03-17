@@ -1,20 +1,23 @@
 from django.utils import timezone
 from django.contrib import messages
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponse, JsonResponse
 from Film_Review.forms import ReviewForm, UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-from Film_Review.models import Film, Review
+from Film_Review.models import Film, Like, Review
 from django.db.models import Avg
 
 
 
 
 def home(request):
-    context_dict= {}
+    top_films = Film.objects.annotate(avg_rating=Avg("review__Rating")).order_by("-avg_rating")[:5]
+            
+
+    context_dict= {"top_films": top_films}
     return render(request, 'ReviewFlix/Home.html', context=context_dict)
 
 # Create your views here.
@@ -129,6 +132,12 @@ def individual_film(request, film_id):
     return render(request, 'ReviewFlix/Film.html', context=context_dict)   
 
 
+# @login_required
+# def review_for_film(request, film_id):
+#     film = Film.objects.get(id=film_id)
+#     context_dict = {'film': film}
+#     return render(request, 'ReviewFlix/Review.html', context=context_dict) 
+
 
 @login_required
 def review_for_film(request, film_id):
@@ -141,7 +150,7 @@ def review_for_film(request, film_id):
             review = form.save(commit=False)
             review.Film = film
             review.Username = request.user
-            review.Likes = 0  
+            review.likes = 0  
             review.DatePublished = timezone.now().date()
             review.save()
             return redirect('ReviewFlix:Film', film_id=film_id) 
@@ -153,3 +162,21 @@ def review_for_film(request, film_id):
         'form': form
     }
     return render(request, 'ReviewFlix/Review.html', context)
+
+@login_required
+def like_review(request):
+    if request.method == 'POST' and request.is_ajax():
+        review_id = request.POST.get('review_id')
+        review = get_object_or_404(Review, id=review_id)
+        user = request.user
+
+        if Like.objects.filter(user=user, review=review).exists():
+            return JsonResponse({'status': 'error', 'message': 'You have already liked this review.'})
+        review.likes += 1
+        review.save()
+
+        Like.objects.create(user=user, review=review)
+
+        return JsonResponse({'status': 'success', 'new_likes': review.likes})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request'})
