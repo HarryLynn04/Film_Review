@@ -12,11 +12,11 @@
     <h1>Welcome to the Add a Movie Page</h1>
 
     <!-- add_film.html -->
-<form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Submit</button>
-</form>
+    </form>
 
 {% endblock %}
 

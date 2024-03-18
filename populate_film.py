@@ -261,6 +261,7 @@ def populate():
 
     shawshank_film.image = 'film_images/shawshank.jpg'
     shawshank_film.save()
+    
 
 if __name__ == '__main__':
     print('Starting Film population script...')
