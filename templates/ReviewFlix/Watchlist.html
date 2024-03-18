@@ -14,6 +14,11 @@
         {% for entry in watchlist_entries %}
             <li>
                 <a href="{% url 'ReviewFlix:Film' film_id=entry.Film.id %}">{{ entry.Film.Title }}</a>
+                <form method="post" action="{% url 'ReviewFlix:remove_from_watchlist' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="film_id" value="{{ entry.Film.id }}">
+                    <input type="submit" value="Remove from Watchlist">
+                </form>
             </li>
         {% empty %}
             <p>No movies in your watchlist.</p>

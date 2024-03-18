@@ -1,7 +1,7 @@
 from django.utils import timezone
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, JsonResponse
 from Film_Review.forms import ReviewForm, UserForm, UserProfileForm, FilmForm
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
@@ -9,6 +9,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from Film_Review.models import Film, Like, Review, Watchlist
 from django.db.models import Avg
+from django.contrib import messages
 
 
 
@@ -183,6 +184,28 @@ def add_to_watchlist(request):
         return redirect('ReviewFlix:Film', film_id=film_id)
     else:
         return redirect('ReviewFlix:Home')
+    
+
+@login_required
+def remove_from_watchlist(request):
+    if request.method == 'POST':
+        film_id = request.POST.get('film_id')
+        user = request.user
+        try:
+            watchlist_entry = Watchlist.objects.get(Username=user, Film_id=film_id)
+            watchlist_entry.delete()
+            messages.success(request, "Movie removed from watchlist.")
+        except Watchlist.DoesNotExist:
+            messages.error(request, "Movie not found in watchlist.")
+    return redirect('ReviewFlix:Watchlist')
+
+
+@login_required
+def check_watchlist(request):
+    film_id = request.GET.get('film_id')
+    user = request.user
+    in_watchlist = Watchlist.objects.filter(Username=user, Film_id=film_id).exists()
+    return JsonResponse({'in_watchlist': in_watchlist})
 
 def like_review(request):
     if request.method == 'POST' and request.is_ajax():
