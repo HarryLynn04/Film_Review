@@ -89,7 +89,7 @@ a:hover{
 }
   
 .about_block{
-  padding: 60px 20px;
+  padding: 60px 0px;
 }
 
 .container.about{
@@ -205,4 +205,24 @@ a:hover {
 .no-reviews {
   color: #666;
 }
- 
+
+#myBtn {
+  background-color: #a6f0fd;
+
+  position: fixed;
+  bottom: 20px;
+  right: 30px; /* Adjusted for consistency */
+  z-index: 99;
+  border: none;
+  outline: none;
+  padding: 25px;
+  display: none; 
+  
+}
+
+#myBtn:hover {
+  background-color: #78bcc0; /* Dark-grey background on hover */
+  transform: scale(1.1); 
+  transition: background-color 0.3s, transform 0.3s; 
+  cursor: pointer;
+}

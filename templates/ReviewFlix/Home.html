@@ -14,6 +14,12 @@
     <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
 {% endblock %}
 
+{% block javascript %}
+    {{ block.super }}
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script src="{% static 'js/carousel.js' %}"></script>
+{% endblock %}
+  
 
 
 {% block body_block %}
@@ -24,83 +30,42 @@
             <p class="paragraph">Lorem Ipsum is simply dummy text of the printing and typesetting industry... It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
             
         </div>
+        
 
         <div class="screen_logo">
-            <img class="screen_img" src="{% static 'images/screen_logo.png' %}"/>
+            <img class="screen_img" src="{% static 'film_images/screen_logo.png' %}"/>
         </div>
 
     </div>
 
-   
-
+    
+    {% if top_films %}
     <section id="image-carousel" class="splide" aria-label="Beautiful Images">
         <div class="splide__track">
                 <ul class="splide__list">
+                {% for film in top_films %}
                     <li class="splide__slide">
                         <div class="title_button">
                             <h1 class="title">Top 5 Highest Rated Films:</h1>
-                            <h2 class="movie_title">Schindler's List</h2>
-
-                            <a href="{% url 'ReviewFlix:Film' 14 %}" class="button">More details</a>
+                            <h2 class="movie_title">{{ film.Title }}</h2>
+                            <h3 class="ranking">Average Rating: {{ film.avg_rating|floatformat:1}}</h3>
+                            <a href="{% url 'ReviewFlix:Film' film.id %}" class="button">More Details</a>
                         </div>
-
-                        <img class="img_slide_bg" src="{% static 'images/schindlers_list.webp' %}"/>
+                        {% if film.image %}
+                            <img class="img_slide_bg" src="{{ film.image.url }}" alt="{{ film.Title }}"/>
+                        {% else %}
+                            <p>No image available.</p>
+                        {% endif %}
+                        
                     </li>
 
-                    <li class="splide__slide">
-                        <div class="title_button">
-                            <h1 class="title">Top 5 Highest Rated Films:</h1>
-                            <h2 class="movie_title">Anchorman: The Legend of Ron Burgundy</h2>
-
-                            <a href="{% url 'ReviewFlix:Film' 9 %}" class="button">More details</a>
-                        </div>
-                        <img class="img_slide_bg" src="{% static 'images/anchorman.webp' %}"/>
-
-
-                    </li>
-
-                    <li class="splide__slide">
-                        <div class="title_button">
-                            <h1 class="title">Top 5 Highest Rated Films:</h1>
-                            <h2 class="movie_title">The Lion King</h2>
-                            <a href="{% url 'ReviewFlix:Film' 1 %}" class="button">More Details</a>
-
-
-                        </div>
-                            <img class="img_slide_bg" src="{% static 'images/lion_king.jpeg' %}"/>
-
-                    </li>
-
-                    <li class="splide__slide">
-                        <div class="title_button">
-                            <h1 class="title">Top 5 Highest Rated Films:</h1>
-                            <h2 class="movie_title">Toy Story</h2>
-
-                            <a href="{% url 'ReviewFlix:Film' 2 %}" class="button">More details</a>
-
-                        </div>
-                        <img class="img_slide_bg" src="{% static 'images/toy_story.avif' %}"/>
-
-
-                    </li>
-
-                    <li class="splide__slide">
-                        <div class="title_button">
-                            <h1 class="title">Top 5 Highest Rated Films:</h1>
-                            <h2 class="movie_title">Finding Nemo</h2>
-
-                            <a href="{% url 'ReviewFlix:Film' 3 %}" class="button">More details</a>
-                        </div>
-                        <img class="img_slide_bg" src="{% static 'images/findingnemo.webp' %}"/>
-
-                    </li>
-                    
-                    
+                {% endfor %}  
                 </ul>
 
                
         </div>
     </section>
+    {% endif %}
 
 
 
@@ -113,19 +78,19 @@
          
         <div class="grid">
             <div class="img_review">
-                <img class="img_slide" src="{% static 'images/pulp_fiction.jpeg' %}"/>
+                <img class="img_slide" src="{% static 'film_images/pulp_fiction.jpeg' %}"/>
                 <a href="{% url 'ReviewFlix:Film' 26  %}review" class="button btn_reviews">Write review</a>
 
             </div>
 
             <div class="img_review">
-                <img class="img_slide" src="{% static 'images/get_out.jpg' %}"/>
+                <img class="img_slide" src="{% static 'film_images/get_out.jpg' %}"/>
                 <a href="{% url 'ReviewFlix:Film' 24 %}review" class="button btn_reviews">Write review</a>
 
             </div>
 
             <div class="img_review">
-                <img class="img_slide" src="{% static 'images/shawshank.jpg' %}"/>
+                <img class="img_slide" src="{% static 'film_images/shawshank.jpg' %}"/>
                 <a href="{% url 'ReviewFlix:Film' 15 %}review" class="button btn_reviews">Write review</a>
 
             </div>
@@ -142,27 +107,8 @@
         <li><a href="{% url 'ReviewFlix:Register' %}">Register Here!</a></li>
         <li><a href="{% url 'ReviewFlix:Login' %}">Login Here!</a></li>
     {% endif %}
-
-
-{% block javascript %}
-    {{ block.super }}
-    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
-    <script src="{% static 'js/carousel.js' %}"></script>
-{% endblock %}
-  
-
     <p>Here you can find the latest reviews of the latest films</p>
 
-    {% if top_films %}
-    <h2>Top 5 Highest Rated Films:</h2>
-    <ul>
-        {% for film in top_films %}
-            <li>{{ film.Title }} - Average Rating: {{ film.avg_rating|floatformat:1}}</li>
-        {% endfor %}
-    </ul>
-    {% else %}
-    <p>No films found.</p>
-    {% endif %}
 
 
 {% endblock %}

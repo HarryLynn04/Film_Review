@@ -16,7 +16,7 @@
     
 
 
-    {% block javascript %}{% endblock %}
+   
 
  
   </head>
@@ -25,7 +25,7 @@
   <body>
     <header>
 
-        <img class="logo_img" src="{% static 'images/logo.png' %}"/>
+        <img class="logo_img" src="{% static 'film_images/logo.png' %}"/>
 
         <ul>
           
@@ -67,6 +67,9 @@
       </div>
     </div>
 
+    <div class="btn_up">
+      <button onclick="topFunction()" id="myBtn" title="Go to top">&#x2191;</button>
+    </div>
 
    
     <footer>
@@ -75,5 +78,9 @@
         <li><a href="{% url 'ReviewFlix:FAQ' %}">FAQs</a></li>
       </ul>
     </footer>
+
+     {% block javascript %}
+    <script src= "{% static 'js/script.js' %}"></script>
+    {% endblock %}
   </body>
 </html>

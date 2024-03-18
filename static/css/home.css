@@ -102,7 +102,7 @@ section.splide{
 
 
 .img_slide_bg{
-    width: 1470px;
+    width: 1550px;
     height: 630px;
 }
 
@@ -115,7 +115,7 @@ section.splide{
 
 .grid{
     display: flex;
-    padding-top: 50px;
+    padding: 50px;
 }
 
 .img_review{
@@ -140,4 +140,15 @@ section.splide{
 background-color:#a6f0fd;
 color: #363537;
 
+}
+
+.ranking{
+    color: #fcf7fa;
+    font-size: 30px;
+    margin-bottom:20px ;
+    margin-top: 0;
+}
+
+.splide__arrow{
+    margin: 0px 20px;
 }
