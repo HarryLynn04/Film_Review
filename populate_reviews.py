@@ -32,9 +32,11 @@ def populate_reviews():
             
             # Generate a random rating for the review
             rating = random.randint(1, 5)
+            
+            # Generate a random number of likes for the review
+            
             thumbsUp = random.randint(0, 10)
             
-            # Generate a random date within the defined range for the review
             review_date = timezone.now()
             
             # Generate a random description for the review
@@ -53,7 +55,7 @@ def populate_reviews():
 
 
 def generate_review_sentiment(rating):
-    # Generate review sentiments based on rating
+    # Generate review description based on rating
     if rating == 1:
         return "terrible"
     elif rating == 2:

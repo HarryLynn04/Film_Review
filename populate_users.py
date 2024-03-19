@@ -36,7 +36,7 @@ def populate_user_profiles():
             'first_name': 'Jane',
             'last_name': 'Doe',
             'password': 'password123',
-            'is_producer': False
+            'is_producer': True
         }
         
  
