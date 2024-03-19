@@ -32,6 +32,7 @@ def populate_reviews():
             
             # Generate a random rating for the review
             rating = random.randint(1, 5)
+            thumbsUp = random.randint(0, 10)
             
             # Generate a random date within the defined range for the review
             review_date = timezone.now()
@@ -44,6 +45,7 @@ def populate_reviews():
                 Rating=rating,
                 DatePublished=review_date,
                 Description=description,
+                likes = thumbsUp,
                 Film=film,
                 Username=user
             )
