@@ -171,7 +171,7 @@ a:hover {
 
 /* Reviews styling */
 .review-container {
-  margin-top: 30px;
+  margin-top: 100px;
 }
 
 .review {
@@ -225,4 +225,30 @@ a:hover {
   transform: scale(1.1); 
   transition: background-color 0.3s, transform 0.3s; 
   cursor: pointer;
+}
+
+.film-details-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: left;
+  text-align: left;
+}
+
+.film-details {
+  max-width: 500px;
+  margin-bottom: 20px;
+}
+
+.film-image {
+  max-width: 100%;
+}
+
+.film-img {
+  max-width: 50%; 
+  
+}
+
+.review-container {
+  clear: both;
 }

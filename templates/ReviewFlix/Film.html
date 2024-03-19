@@ -13,29 +13,8 @@
             <p><strong>Release Date:</strong> {{ film.ReleaseDate }}</p>
             <p><strong>Director:</strong> {{ film.Director }}</p>
             <p><strong>Cast:</strong> {{ film.Cast }}</p>
-            <h2>Reviews:</h2>
-            <div class="review-container">
-                {% if reviews %}
-                    <p>Average Rating: {{ average_rating|floatformat:1 }}</p>
-                    <ul>
-                        {% for review in reviews %}
-                            <div class="review">
-                                <p class="review-author">Author: {{ review.Username }}</p>
-                                <p class="review-rating">Rating: {{ review.Rating }}</p>
-                                <p class="review-description">Description: {{ review.Description }}</p>
-                                <p class="review-likes">Likes: <span id="likes-count-{{ review.id }}">{{ review.likes }}</span></p>
-                                <p class="review-date">Published on: {{ review.DatePublished }}</p>
-                                <button class="like-btn" data-review-id="{{ review.id }}">Like</button>
-                            </div>
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                    <p class="no-reviews">No reviews available for this film.</p>
-                {% endif %}
-            </div>
-
-    <a href="{% url 'ReviewFlix:FilmReview' film_id=film.id %}">Write a Review</a>
-
+            
+            <a href="{% url 'ReviewFlix:FilmReview' film_id=film.id %}">Write a Review</a>
 
             {% if user.is_authenticated %}
                 <form id="watchlist-form" method="post" action="{% url 'ReviewFlix:add_to_watchlist' %}">
@@ -47,8 +26,30 @@
         </div>
         {% if film.image %}
             <div class="film-image">
-                <img src="{{ film.image.url }}" alt="{{ film.Title }} Image">
+                <img src="{{ film.image.url }}" alt="{{ film.Title }} Image" class="film-img">
             </div>
+        {% endif %}
+    </div>
+
+    <div class="review-container">
+        <h2>Reviews:</h2>
+
+        {% if reviews %}
+            <p>Average Rating: {{ average_rating|floatformat:1 }}</p>
+            <ul>
+                {% for review in reviews %}
+                    <div class="review">
+                        <p class="review-author">Author: {{ review.Username }}</p>
+                        <p class="review-rating">Rating: {{ review.Rating }}</p>
+                        <p class="review-description">Description: {{ review.Description }}</p>
+                        <p class="review-likes">Likes: <span id="likes-count-{{ review.id }}">{{ review.likes }}</span></p>
+                        <p class="review-date">Published on: {{ review.DatePublished }}</p>
+                        <button class="like-btn" data-review-id="{{ review.id }}">Like</button>
+                    </div>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="no-reviews">No reviews available for this film.</p>
         {% endif %}
     </div>
 
@@ -78,11 +79,7 @@
                     }
                 });
             });
-        });
-    </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
+
             var filmId = "{{ film.id }}";
             $.ajax({
                 type: "GET",
@@ -98,7 +95,7 @@
                     }
                 }
             });
-    
+
             $("#watchlist-btn").click(function(e) {
                 e.preventDefault();
                 var form = $(this).closest("form");

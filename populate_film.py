@@ -74,7 +74,7 @@ def populate():
             'Cast': 'Graham Chapman, John Cleese, Eric Idle'
         },
         {
-            'Title': 'Anchorman: The Legend of Ron Burgundy',
+            'Title': 'Anchorman The Legend of Ron Burgundy',
             'Genre': 'comedy',
             'Description': 'Ron Burgundy is San Diego\'s top-rated newsman in the male-dominated broadcasting of the 1970s, but that\'s all about to change for Ron and his cronies when an ambitious woman is hired as a new anchor.',
             'ReleaseDate': '2004-07-09',
@@ -140,7 +140,7 @@ def populate():
             'Cast': 'Kim Ashdown, Ken Balcomb, Samantha Berg'
         },
         {
-            'Title': 'Won\'t You Be My Neighbor?',
+            'Title': 'Won\'t You Be My Neighbor',
             'Genre': 'documentary',
             'Description': 'An exploration of the life, lessons, and legacy of iconic children\'s television host, Fred Rogers.',
             'ReleaseDate': '2018-06-29',
@@ -255,12 +255,16 @@ def populate():
         }
     ]
     for film in films_data:
-        Film.objects.get_or_create(**film)
-    
-    shawshank_film = Film.objects.get(Title='The Shawshank Redemption')
-
-    shawshank_film.image = 'film_images/shawshank.jpg'
-    shawshank_film.save()
+        # Get or create the film object
+        film_obj, created = Film.objects.get_or_create(**film)
+        
+        # Generate the image path based on the film title
+        image_filename = film['Title'].replace(' ', '_').lower() + '.jpg'
+        image_path = os.path.join('film_images', image_filename)
+        
+        # Update the image field of the film object
+        film_obj.image = image_path
+        film_obj.save()
     
 
 if __name__ == '__main__':
