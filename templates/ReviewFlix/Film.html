@@ -34,7 +34,7 @@
                 {% endif %}
             </div>
 
-    <a href="{% url 'ReviewFlix:FilmReview' film_id=film.id %}">Write a Review</a>
+    <button href="{% url 'ReviewFlix:FilmReview' film_id=film.id %}">Write a Review</button>
 
 
             {% if user.is_authenticated %}
