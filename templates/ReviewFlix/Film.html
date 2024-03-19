@@ -36,6 +36,19 @@
 
         {% if reviews %}
             <p>Average Rating: {{ average_rating|floatformat:1 }}</p>
+            <div>
+                <form method="GET" action="">
+                  <label for="sort">Sort By:</label>
+                  <select name="sort">
+                    <option value="-DatePublished">Most Recently Added</option>
+                    <option value="Rating">Rating (Low to High)</option>
+                    <option value="-Rating">Rating (High to Low)</option>
+                    <option value="-likes">Likes (Most to Least)</option>
+                    <option value="likes">Likes (Least to Most)</option>
+                  </select>
+                  <button type="submit">Sort</button>
+                </form>
+              </div>
             <ul>
                 {% for review in reviews %}
                     <div class="review">
