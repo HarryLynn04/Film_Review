@@ -134,7 +134,8 @@ def user_logout(request):
     
 def individual_film(request, film_id):
     film = Film.objects.get(id=film_id)
-    reviews = Review.objects.filter(Film=film)
+    sort = request.GET.get('sort', '-DatePublished')
+    reviews = Review.objects.filter(Film=film).order_by(sort)
     average_rating = reviews.aggregate(Avg('Rating'))['Rating__avg']
     
     context_dict = {'film': film, "reviews": reviews, "average_rating": average_rating}
