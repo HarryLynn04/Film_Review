@@ -1,0 +1,60 @@
+
+.title{
+    text-align: center;
+    font-size: 50px;
+}
+
+.container{
+    padding: 0 40px;
+}
+
+.wrapper{
+    display: flex;
+    padding: 40px 0;
+}
+
+.film_img{
+    width: 50%;
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+
+.text_wrapper{
+    display: flex;
+    flex-direction: column;
+    padding: 0 100px;
+}
+
+.text_wrapper h1{
+    font-size: 35px;
+    text-align: center;
+}
+  
+
+.star::before {
+    font-size: 35px;
+    cursor: pointer;
+    content: '\2606'; 
+    display: inline-block;
+}
+
+.star:hover::before {
+    color: #007bff;
+    content: '\2605'; /* Filled star */
+}
+
+.submit-btn {
+    background-color: #78bcc0;
+    color: #fcf7fa;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.4s linear;
+    cursor: pointer;
+}
+.submit-btn:hover{
+    background-color:#a6f0fd;
+    color: #363537;
+    
+}
