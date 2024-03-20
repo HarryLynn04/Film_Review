@@ -19,7 +19,6 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
         fields = ('firstName', 'lastName', 'isProducer',)
         
-        
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review

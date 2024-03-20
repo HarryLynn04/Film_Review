@@ -1,41 +1,68 @@
 {% extends 'ReviewFlix/base.html' %}
 
+{% load staticfiles %}
+
+
 {% block title_block %}
     {{ film.Title }}
 {% endblock %}
 
+{% block additional_css %}
+    <link rel="stylesheet" href="{% static 'css/film.css' %}">
+
+{% endblock %}
+
 {% block body_block %}
     <div class="film-details-container">
-        <div class="film-details">
-            <h1>{{ film.Title }}</h1>
-            <p><strong>Genre:</strong> {{ film.Genre }}</p>
-            <p><strong>Description:</strong> {{ film.Description }}</p>
-            <p><strong>Release Date:</strong> {{ film.ReleaseDate }}</p>
-            <p><strong>Director:</strong> {{ film.Director }}</p>
-            <p><strong>Cast:</strong> {{ film.Cast }}</p>
-            
-            <a href="{% url 'ReviewFlix:FilmReview' film_id=film.id %}">Write a Review</a>
+        <div class="film_details">
+            <div class="wrapper">
+                {% if film.image %}
+                    <div class="film_image">
+                        <img src="{{ film.image.url }}" alt="{{ film.Title }} Image" class="film_img">
+                    </div>
+                {% endif %}
 
-            {% if user.is_authenticated %}
-                <form id="watchlist-form" method="post" action="{% url 'ReviewFlix:add_to_watchlist' %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="film_id" value="{{ film.id }}">
-                    <input type="submit" value="Add to Watchlist" id="watchlist-btn">
-                </form>
-            {% endif %}
-        </div>
-        {% if film.image %}
-            <div class="film-image">
-                <img src="{{ film.image.url }}" alt="{{ film.Title }} Image" class="film-img">
+                <div class="information">
+                    <h1>{{ film.Title }}</h1>
+                    <div class="text_wrapper">
+                        <p><strong>Genre:</strong> {{ film.Genre }}</p>
+                        <p><strong>Description:</strong> {{ film.Description }}</p>
+                        <p><strong>Release Date:</strong> {{ film.ReleaseDate }}</p>
+                        <p><strong>Director:</strong> {{ film.Director }}</p>
+                        <p><strong>Cast:</strong> {{ film.Cast }}</p>
+                        {% if reviews %}
+                            <p><strong>Average Rating:</strong> {{ average_rating|floatformat:1 }}</p>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="btn_wrapper">
+                        <a class="btn" href="{% url 'ReviewFlix:FilmReview' film_id=film.id %}">Write a Review</a>
+                        {% if user.is_authenticated %}
+                        <form id="watchlist-form" method="post" action="{% url 'ReviewFlix:add_to_watchlist' %}">
+                            {% csrf_token %}
+                            <input class="btn input_btn" type="hidden" name="film_id" value="{{ film.id }}">
+                            <input class="btn input_btn" type="submit" value="Add to Watchlist" id="watchlist-btn">
+                        </form>
+                        {% endif %}
+                    </div>
+                    
+                </div>
+                
+
+                
             </div>
-        {% endif %}
+            
+
+
+
+        </div>
+       
     </div>
 
     <div class="review-container">
         <h2>Reviews:</h2>
 
         {% if reviews %}
-            <p>Average Rating: {{ average_rating|floatformat:1 }}</p>
             <div>
                 <form method="GET" action="">
                   <label for="sort">Sort By:</label>
