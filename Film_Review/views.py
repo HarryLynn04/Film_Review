@@ -146,11 +146,6 @@ def individual_film(request, film_id):
     return render(request, 'ReviewFlix/Film.html', context=context_dict)   
 
 
-# @login_required
-# def review_for_film(request, film_id):
-#     film = Film.objects.get(id=film_id)
-#     context_dict = {'film': film}
-#     return render(request, 'ReviewFlix/Review.html', context=context_dict) 
 
 
 @login_required
