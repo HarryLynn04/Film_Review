@@ -96,8 +96,37 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
-            $(".like-btn").click(function() {
+            $(".like-btn").each(function () {
                 var reviewId = $(this).data("review-id");
+                var likeButton = $(this);
+                $.ajax({
+                    url: "{% url 'ReviewFlix:check_like_status' %}",
+                    type: "GET",
+                    data: {
+                        review_id: reviewId,
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.status === "success") {
+                            if (response.liked) {
+                                likeButton.text("Unlike");
+                            } else {
+                                likeButton.text("Like");
+                            }
+                        } else {
+                            console.error(response.message);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+
+            $(".like-btn").click(function () {
+                var reviewId = $(this).data("review-id");
+                var likeButton = $(this);
+
                 $.ajax({
                     url: "{% url 'ReviewFlix:like_review' %}",
                     type: "POST",
@@ -106,15 +135,20 @@
                         csrfmiddlewaretoken: "{{ csrf_token }}"
                     },
                     dataType: "json",
-                    success: function(response) {
+                    success: function (response) {
                         if (response.status === "success") {
                             var newLikes = response.new_likes;
                             $("#likes-count-" + reviewId).text(newLikes);
+                            if (likeButton.text() === "Like") {
+                                likeButton.text("Unlike");
+                            } else {
+                                likeButton.text("Like");
+                            }
                         } else {
                             alert(response.message);
                         }
                     },
-                    error: function(xhr, status, error) {
+                    error: function (xhr, status, error) {
                         console.error(xhr.responseText);
                     }
                 });
