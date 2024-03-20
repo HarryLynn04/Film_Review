@@ -3,7 +3,10 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Film_Reviews_Project.settings')
 
 import django
 django.setup()
-from Film_Review.models import Film
+from Film_Review.models import Film, UserProfile, Watchlist, Like, Review
+from django.contrib.auth.models import User
+import random, datetime
+from django.utils import timezone
 
 def populate():
     films_data = [
@@ -265,9 +268,113 @@ def populate():
         # Update the image field of the film object
         film_obj.image = image_path
         film_obj.save()
+        
+    users_data = [
+        {
+            'username': 'john_doe',
+            'first_name': 'John',
+            'last_name': 'Doe',
+            'password': 'password123',
+            'is_producer': False
+        },
+        {
+            'username': 'jane_smith',
+            'first_name': 'Jane',
+            'last_name': 'Smith',
+            'password': 'password123',
+            'is_producer': True
+        },
+        
+        {
+            'username': 'jim_brown',
+            'first_name': 'Jim',
+            'last_name': 'Brown',
+            'password': 'password123',
+            'is_producer': False
+        },
+        
+        {
+            'username': 'jane_doe',
+            'first_name': 'Jane',
+            'last_name': 'Doe',
+            'password': 'password123',
+            'is_producer': True
+        }
+        
+ 
+    ]
+
+    for user_data in users_data:
+        # Create user
+        user = User.objects.create_user(
+            username=user_data['username'],
+            first_name=user_data['first_name'],
+            last_name=user_data['last_name'],
+            password=user_data['password']
+        )
+
+        # Create user profile
+        UserProfile.objects.create(
+            user=user,
+            firstName=user_data['first_name'],
+            lastName=user_data['last_name'],
+            isProducer=user_data['is_producer']
+        )
+
+        print(f'Created UserProfile for user: {user.username}')
     
+    # Get all films from the database
+    films = Film.objects.all()
+
+    # Get all users from the database
+    users = User.objects.all()
+
+   
+
+    for film in films:
+        # Generate a random number of reviews for each film (between 1 and 5)
+        num_reviews = random.randint(1, 5)
+        
+        for _ in range(num_reviews):
+            # Choose a random user for the review
+            user = random.choice(users)
+            
+            # Generate a random rating for the review
+            rating = random.randint(1, 5)
+            
+            # Generate a random number of likes for the review
+            
+            thumbsUp = random.randint(0, 10)
+            
+            review_date = timezone.now()
+            
+            # Generate a random description for the review
+            description = f"This film is {generate_review_sentiment(rating)}."
+            
+            # Create the review object
+            review = Review.objects.create(
+                Rating=rating,
+                DatePublished=review_date,
+                Description=description,
+                likes = thumbsUp,
+                Film=film,
+                Username=user
+            )
+
+def generate_review_sentiment(rating):
+    # Generate review description based on rating
+    if rating == 1:
+        return "terrible"
+    elif rating == 2:
+        return "not good"
+    elif rating == 3:
+        return "average"
+    elif rating == 4:
+        return "good"
+    elif rating == 5:
+        return "excellent"
 
 if __name__ == '__main__':
-    print('Starting Film population script...')
+    print('Starting population script...')
     populate()
-    print('Film population script complete.')
+    print(' population script complete.')
