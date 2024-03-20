@@ -7,8 +7,16 @@ from Film_Review.models import Film, UserProfile, Watchlist, Like, Review
 from django.contrib.auth.models import User
 import random, datetime
 from django.utils import timezone
+from django.db import connection
 
 def populate():
+    
+    Film.objects.all().delete()
+    User.objects.all().delete()
+    UserProfile.objects.all().delete()
+    Review.objects.all().delete()
+    
+    
     films_data = [
         # Animated
         {

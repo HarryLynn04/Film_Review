@@ -9,14 +9,42 @@
     Thriller
 {% endblock %}
 
+{% block additional_css %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script src="{% static 'js/carousel.js' %}"></script>
+{% endblock %}
+
 {% block body_block %}
     <h1>Welcome to the Thriller Movies Page</h1>
+    <section id="image-carousel" class="splide" aria-label="Beautiful Images">
+        <div class="splide__track">
+                <ul class="splide__list">
+                {% for film in films %}
+                    <li class="splide__slide">
+                        <div class="title_button">
+                            <h2 class="movie_title">{{ film.Title }}</h2>
+                            <a href="{% url 'ReviewFlix:Film' film.id %}" class="button">More Details</a>
+                        </div>
+                        {% if film.image %}
+                            <img class="img_slide_bg" src="{{ film.image.url }}" alt="{{ film.Title }}"/>
+                        {% else %}
+                            <p>No image available.</p>
+                        {% endif %}
+                        
+                    </li>
 
-    <ul>
-        {% for film in films %}
-            <li><a href="{% url "ReviewFlix:Film" film.id %}">{{ film.Title }}</a></li>
-        {% endfor %}
-    </ul>
+                {% endfor %}  
+                </ul>
+
+               
+        </div>
+    </section>
 {% endblock %}
 
 
