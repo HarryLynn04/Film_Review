@@ -1,23 +1,29 @@
-
-
 {% extends 'ReviewFlix/base.html' %}
 {% load staticfiles %}
-
 
 {% block title_block %}
     Add a Movie
 {% endblock %}
 
-{% block body_block %}
-    <h1>Welcome to the Add a Movie Page</h1>
-
-    <!-- add_film.html -->
-    <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
-    </form>
-
+{% block additional_css %}
+    <link rel="stylesheet" href="{% static 'css/add_movie.css' %}">
 {% endblock %}
 
+{% block body_block %}
+    <div class="wrapper">
+        <div class="description">
+            <h1>Welcome to the Add a Movie Page</h1>
+        </div>
 
+        <div class="screen_logo">
+            <img class="screen_img" src="{% static 'film_images/screen_logo.png' %}"/>
+        </div>
+    </div>
+
+    <!-- add_film.html -->
+    <form class="add-movie-form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="submit-btn">Submit</button>
+    </form>
+{% endblock %}

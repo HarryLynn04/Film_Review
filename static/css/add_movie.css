@@ -1,0 +1,46 @@
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.description {
+    flex: 1;
+    padding: 20px;
+}
+
+.screen_logo {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+}
+
+.screen_img {
+    max-width: 100%;
+}
+
+.add-movie-form {
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+.add-movie-form input[type="text"],
+.add-movie-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.add-movie-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-movie-form button:hover {
+    background-color: #0056b3;
+}
