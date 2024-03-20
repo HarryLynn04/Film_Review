@@ -53,16 +53,7 @@
             </div>
             
 
-    <button href="{% url 'ReviewFlix:FilmReview' film_id=film.id %}">Write a Review</button>
 
-
-            {% if user.is_authenticated %}
-                <form id="watchlist-form" method="post" action="{% url 'ReviewFlix:add_to_watchlist' %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="film_id" value="{{ film.id }}">
-                    <input type="submit" value="Add to Watchlist" id="watchlist-btn">
-                </form>
-            {% endif %}
 
         </div>
        
