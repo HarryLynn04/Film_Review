@@ -1,40 +1,51 @@
 {% extends 'ReviewFlix/base.html' %}
+{% load staticfiles %}
+
 
 {% block title_block %}
     Review
 {% endblock %}
 
+{% block additional_css %}
+    <link rel="stylesheet" href="{% static 'css/review.css' %}">
+{% endblock %}
+
+
+{% block javascript %}
+    {{ block.super }}
+    <script src="{% static 'js/review.js' %}"></script>
+{% endblock %}
 
 {% block body_block %}
+
 <div class="container mt-4">
-    <h1>Review for "{{ film.Title }}"</h1>
-    <p>Write your review about the film {{ film.Title }}</p>
+    <h1 class="title">Review for "{{ film.Title }}"</h1>
+    <div class="wrapper">
+        <img class="film_img" src="{{ film.image.url }}"/>
+        <div class="text_wrapper">
+            <h2>Description</h2>
+            <p class="description">{{ film.Description }}</p>
+        </div>
+            
+    </div>
+    
+   <div class="review_block">
+        <h1>Add review: "{{ film.Title }}"</h1>
+        <div id="stars"></div>
+        <h3 id="output">Rating is: 0/5</h3>
+    </div> 
 
-    <p>Description:</p>
-    <p>Description of the film</p>
 
 
+ 
 
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-
         
-
-        <div class="text-formatting">
-            <button type="button" onclick="formatText('bold')"><strong>B</strong></button>
-            <button type="button" onclick="formatText('italic')"><em>I</em></button>
-            <button type="button" onclick="formatText('underline')"><u>U</u></button>
-            <button type="button" onclick="formatText('spoiler')">SPOILER!</button>
-            <button onclick="displayFormattedReview()">Display Review</button>
-
-            <div id="formattedText" style="border: 1px solid #ccc; padding: 10px; margin-top: 10px;"></div>
-
-        </div>
         <button type="submit" class="submit-btn">Submit Review</button>
-        <div id="formattedText"></div
     
-    </form>
+    </form> 
 
 
     
