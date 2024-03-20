@@ -16,7 +16,11 @@ from django.contrib import messages
 
 def home(request):
     top_films = Film.objects.annotate(avg_rating=Avg("review__Rating")).order_by("-avg_rating")[:5]
-    context_dict= {"top_films": top_films}
+    pulp_fiction = Film.objects.get(Title="Pulp Fiction")
+    getOut = Film.objects.get(Title="Get Out")
+    shawshank = Film.objects.get(Title="The Shawshank Redemption")
+    
+    context_dict= {"top_films": top_films, "pulp_fiction": pulp_fiction, "getOut": getOut, "shawshank": shawshank}
     return render(request, 'ReviewFlix/Home.html', context=context_dict)
 
 # Create your views here.

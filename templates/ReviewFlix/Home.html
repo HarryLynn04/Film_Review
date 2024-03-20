@@ -80,19 +80,19 @@
             
             <div class="img_review">
                 <img class="img_slide" src="{% static 'film_images/pulp_fiction.jpeg' %}"/>
-                <a href="{% url 'ReviewFlix:Film' 26  %}review" class="button btn_reviews">Write review</a>
+                <a href="{% url 'ReviewFlix:Film' pulp_fiction.id  %}review" class="button btn_reviews">Write review</a>
 
             </div>
 
             <div class="img_review">
                 <img class="img_slide" src="{% static 'film_images/get_out.jpg' %}"/>
-                <a href="{% url 'ReviewFlix:Film' 24 %}review" class="button btn_reviews">Write review</a>
+                <a href="{% url 'ReviewFlix:Film' getOut.id %}review" class="button btn_reviews">Write review</a>
 
             </div>
 
             <div class="img_review">
                 <img class="img_slide" src="{% static 'film_images/shawshank.jpg' %}"/>
-                <a href="{% url 'ReviewFlix:Film' 15 %}review" class="button btn_reviews">Write review</a>
+                <a href="{% url 'ReviewFlix:Film' shawshank.id %}review" class="button btn_reviews">Write review</a>
 
             </div>
         </div>
