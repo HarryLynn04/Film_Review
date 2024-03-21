@@ -51,6 +51,7 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Review for {self.Film.Title} by {self.Username.username}"
+
     
 class Like(models.Model):
     review = models.ForeignKey(Review, on_delete=models.CASCADE)
@@ -58,7 +59,8 @@ class Like(models.Model):
 
     class Meta:
         unique_together = ['review', 'user']
-    
+
+
 class Watchlist(models.Model):
     Username = models.ForeignKey(User, on_delete=models.CASCADE)
     Film = models.ForeignKey(Film, on_delete=models.CASCADE)

@@ -12,8 +12,6 @@ from django.db.models import Avg
 from django.contrib import messages
 
 
-
-
 def home(request):
     top_films = Film.objects.annotate(avg_rating=Avg("review__Rating")).order_by("-avg_rating")[:5]
     pulp_fiction = Film.objects.get(Title="Pulp Fiction")
@@ -144,13 +142,6 @@ def individual_film(request, film_id):
     
     context_dict = {'film': film, "reviews": reviews, "average_rating": average_rating}
     return render(request, 'ReviewFlix/Film.html', context=context_dict)   
-
-
-# @login_required
-# def review_for_film(request, film_id):
-#     film = Film.objects.get(id=film_id)
-#     context_dict = {'film': film}
-#     return render(request, 'ReviewFlix/Review.html', context=context_dict) 
 
 
 @login_required

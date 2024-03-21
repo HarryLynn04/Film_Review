@@ -8,4 +8,3 @@ admin.site.register(Film)
 admin.site.register(UserProfile)
 admin.site.register(Review)
 admin.site.register(Watchlist)
-
