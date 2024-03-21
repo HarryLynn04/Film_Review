@@ -26,11 +26,11 @@ class ReviewForm(forms.ModelForm):
         model = Review
         fields = ['Rating', 'Description']  
         widgets = {
-            'Description': forms.Textarea(attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Leave your comment about the film'}),
+            'Description': forms.Textarea(attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Leave your review'}),
             'Rating': forms.NumberInput(attrs={'class': 'form-control', 'min': 1, 'max': 5}),
         }
         labels = {
-            'Rating': 'Your Rating',
+            'Rating': 'Your Rating (1-5)',
             'Description': 'Your Review',
         }
         
