@@ -213,13 +213,31 @@ def like_review(request):
         review = get_object_or_404(Review, id=review_id)
         user = request.user
 
-        if Like.objects.filter(user=user, review=review).exists():
-            return JsonResponse({'status': 'error', 'message': 'You have already liked this review.'})
-        review.likes += 1
+        try:
+            existing_like = Like.objects.get(user=user, review=review)
+            existing_like.delete()
+            new_likes = review.likes - 1
+        except Like.DoesNotExist:
+            Like.objects.create(user=user, review=review)
+            new_likes = review.likes + 1
+
+        review.likes = new_likes
         review.save()
 
-        Like.objects.create(user=user, review=review)
+        return JsonResponse({'status': 'success', 'new_likes': new_likes})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request'})
+    
+def check_like_status(request):
+    if request.method == 'GET' and request.is_ajax():
+        review_id = request.GET.get('review_id')
+        user = request.user
 
-        return JsonResponse({'status': 'success', 'new_likes': review.likes})
+        try:
+            review = Review.objects.get(id=review_id)
+            liked = Like.objects.filter(user=user, review=review).exists()
+            return JsonResponse({'status': 'success', 'liked': liked})
+        except Review.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'Review not found'})
     else:
         return JsonResponse({'status': 'error', 'message': 'Invalid request'})

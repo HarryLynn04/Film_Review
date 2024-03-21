@@ -24,6 +24,5 @@ urlpatterns = [
     path('film/<int:film_id>/', views.individual_film, name='Film'),
     path('film/<int:film_id>/review/', views.review_for_film, name='FilmReview'),
     path('like_review/', views.like_review, name='like_review'),
-
-     path('like_review/', views.like_review, name='like_review'),
+    path('check_like_status/', views.check_like_status, name='check_like_status'),
 ]
