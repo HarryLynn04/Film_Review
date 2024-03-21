@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from Film_Review.models import Review, UserProfile, Film
 
 
+#Form for user authentication
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
     class Meta:
@@ -13,13 +14,13 @@ class UserForm(forms.ModelForm):
             'password': None,
         }
         
-
+#Form for user profile information
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('firstName', 'lastName', 'isProducer',)
         
-        
+#Form for submitting film reviews      
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
@@ -33,7 +34,7 @@ class ReviewForm(forms.ModelForm):
             'Description': 'Your Review',
         }
         
-
+#Form for adding new films to the database
 class FilmForm(forms.ModelForm):
     class Meta:
         model = Film
