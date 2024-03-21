@@ -29,7 +29,7 @@ SECRET_KEY = '8k*)=l!x*l=wsc^*9h-p_yszhd8gg_d+pg2aj3_ybg6l=y)ogd'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['khushimotwani.pythonanywhere.com']
+ALLOWED_HOSTS = ['khushimotwani.pythonanywhere.com','127.0.0.1']
 
 
 # Application definition
