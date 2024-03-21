@@ -1,4 +1,6 @@
-
+body{
+  overflow-x: hidden;
+}
 /* Header styles */
 header {
   background-color: #333;
