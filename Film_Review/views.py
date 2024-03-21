@@ -13,7 +13,7 @@ from django.contrib import messages
 
 
 
-
+#Renders the home page showing top-rated films
 def home(request):
     top_films = Film.objects.annotate(avg_rating=Avg("review__Rating")).order_by("-avg_rating")[:5]
     pulp_fiction = Film.objects.get(Title="Pulp Fiction")
@@ -23,18 +23,19 @@ def home(request):
     context_dict= {"top_films": top_films, "pulp_fiction": pulp_fiction, "getOut": getOut, "shawshank": shawshank}
     return render(request, 'ReviewFlix/Home.html', context=context_dict)
 
-# Create your views here.
+#Renders the FAQ page
 def faq(request):
     context_dict= {}
     return render(request, 'ReviewFlix/FAQ.html', context=context_dict)
 
+#Renders the watchlist page displaying films added by the logged-in user
 @login_required
 def watchlist(request):
     watchlist_entries = Watchlist.objects.filter(Username=request.user)
     context_dict= {'watchlist_entries': watchlist_entries}
     return render(request, 'ReviewFlix/Watchlist.html', context=context_dict)
 
-
+#Handles the addition of a new movie to the database
 def addAMovie(request):
     if request.method == 'POST':
         form = FilmForm(request.POST, request.FILES)
@@ -45,41 +46,48 @@ def addAMovie(request):
         form = FilmForm()
     return render(request, 'ReviewFlix/AddAMovie.html', {'form': form})
 
-
+#Renders the genres page
 def genres(request):
     context_dict= {}
     return render(request, 'ReviewFlix/Genres.html', context=context_dict)
 
+#Renders pages for specific film genres
 def thriller(request):
     films = Film.objects.filter(Genre='thriller')
     context_dict= {'films': films}
     return render(request, 'ReviewFlix/Thriller.html', context=context_dict) 
 
+#Renders pages for specific film genres
 def animated(request):
     films = Film.objects.filter(Genre='animated')
     context_dict= {'films': films}
     return render(request, 'ReviewFlix/Animated.html', context=context_dict)  
 
+#Renders pages for specific film genres
 def comedy(request):
     films = Film.objects.filter(Genre='comedy')
     context_dict= {'films': films}
     return render(request, 'ReviewFlix/Comedy.html', context=context_dict)   
 
+#Renders pages for specific film genres
 def horror(request):
     films = Film.objects.filter(Genre='horror')
     context_dict= {'films': films}
     return render(request, 'ReviewFlix/Horror.html', context=context_dict)     
 
+#Renders pages for specific film genres
 def drama(request):
     films = Film.objects.filter(Genre='drama')
     context_dict= {'films': films}
     return render(request, 'ReviewFlix/Drama.html', context=context_dict)                                         
 
+#Renders pages for specific film genres
 def documentary(request):
     films = Film.objects.filter(Genre='documentary')
     context_dict= {'films': films}
     return render(request, 'ReviewFlix/Documentary.html', context=context_dict)  
 
+#Handles user registration, validates form inputs, and creates new user accounts
 def register(request):
     registered = False
     if request.method == 'POST':
@@ -112,6 +120,7 @@ def register(request):
                            'profile_form': profile_form, 
                            'registered': registered}) 
 
+#Handles user login, authenticates users, and redirects them to the home page upon successful login
 def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -131,11 +140,13 @@ def user_login(request):
     else:
         return render(request, 'ReviewFlix/Login.html')  
 
+#Logs out the user and redirects them to the home page
 @login_required
 def user_logout(request):
     logout(request)
     return redirect(reverse('ReviewFlix:Home'))   
     
+#Renders the page for an individual film, showing details and reviews
 def individual_film(request, film_id):
     film = Film.objects.get(id=film_id)
     sort = request.GET.get('sort', '-DatePublished')
@@ -145,9 +156,7 @@ def individual_film(request, film_id):
     context_dict = {'film': film, "reviews": reviews, "average_rating": average_rating}
     return render(request, 'ReviewFlix/Film.html', context=context_dict)   
 
-
-
-
+#Handles adding a review for a specific film, validates form inputs, and saves the review to the database
 @login_required
 def review_for_film(request, film_id):
     film = Film.objects.get(id=film_id)
@@ -172,7 +181,7 @@ def review_for_film(request, film_id):
     }
     return render(request, 'ReviewFlix/Review.html', context)
 
-
+#Adds a film to the user's watchlist
 @login_required
 def add_to_watchlist(request):
     if request.method == 'POST':
@@ -185,7 +194,7 @@ def add_to_watchlist(request):
     else:
         return redirect('ReviewFlix:Home')
     
-
+#Removes a film from the user's watchlist
 @login_required
 def remove_from_watchlist(request):
     if request.method == 'POST':
@@ -199,7 +208,7 @@ def remove_from_watchlist(request):
             messages.error(request, "Movie not found in watchlist.")
     return redirect('ReviewFlix:Watchlist')
 
-
+#Checks if a film is in the user's watchlist
 @login_required
 def check_watchlist(request):
     film_id = request.GET.get('film_id')
@@ -207,6 +216,7 @@ def check_watchlist(request):
     in_watchlist = Watchlist.objects.filter(Username=user, Film_id=film_id).exists()
     return JsonResponse({'in_watchlist': in_watchlist})
 
+#Handles liking a review, increments the like count, and saves the like to the database
 def like_review(request):
     if request.method == 'POST' and request.is_ajax():
         review_id = request.POST.get('review_id')

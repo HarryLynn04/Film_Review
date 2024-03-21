@@ -96,6 +96,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
+            // Event listener for clicking the like button
             $(".like-btn").each(function () {
                 var reviewId = $(this).data("review-id");
                 var likeButton = $(this);
@@ -124,13 +125,14 @@
             });
 
             $(".like-btn").click(function () {
+                // Get the review ID associated with the clicked like button
                 var reviewId = $(this).data("review-id");
                 var likeButton = $(this);
 
                 $.ajax({
-                    url: "{% url 'ReviewFlix:like_review' %}",
-                    type: "POST",
-                    data: {
+                    url: "{% url 'ReviewFlix:like_review' %}", // URL to the like_review view
+                    type: "POST", // HTTP method type
+                    data: { // Data to send in the request
                         review_id: reviewId,
                         csrfmiddlewaretoken: "{{ csrf_token }}"
                     },
@@ -154,37 +156,42 @@
                 });
             });
 
+             // Get the film ID
             var filmId = "{{ film.id }}";
+            // AJAX request to check if the film is in the user's watchlist
             $.ajax({
-                type: "GET",
-                url: "/ReviewFlix/check_watchlist/",
-                data: { film_id: filmId },
-                success: function(response) {
-                    if (response.in_watchlist) {
-                        $("#watchlist-btn").val("Remove from Watchlist");
-                        $("#watchlist-form").attr("action", "{% url 'ReviewFlix:remove_from_watchlist' %}");
-                    } else {
-                        $("#watchlist-btn").val("Add to Watchlist");
-                        $("#watchlist-form").attr("action", "{% url 'ReviewFlix:add_to_watchlist' %}");
+                type: "GET", // HTTP method type
+                url: "/ReviewFlix/check_watchlist/", // URL to the check_watchlist view
+                data: { film_id: filmId }, // Data to send in the request (film ID)
+                success: function(response) { // Function to execute on successful response
+                    if (response.in_watchlist) { // If the film is in the user's watchlist
+                        $("#watchlist-btn").val("Remove from Watchlist"); // Update the watchlist button text
+                        $("#watchlist-form").attr("action", "{% url 'ReviewFlix:remove_from_watchlist' %}"); // Update the form action
+                    } else { // If the film is not in the user's watchlist
+                        $("#watchlist-btn").val("Add to Watchlist"); // Update the watchlist button text
+                        $("#watchlist-form").attr("action", "{% url 'ReviewFlix:add_to_watchlist' %}"); // Update the form action
                     }
                 }
             });
 
+            // Event listener for clicking the watchlist button
             $("#watchlist-btn").click(function(e) {
-                e.preventDefault();
-                var form = $(this).closest("form");
-                var action = form.attr("action");
+                e.preventDefault(); // Prevent the default form submission
+                var form = $(this).closest("form"); // Get the closest form element
+                var action = form.attr("action"); // Get the form action
+                // AJAX request to add/remove a film from the user's watchlist
                 $.ajax({
-                    type: "POST",
-                    url: action,
-                    data: form.serialize(),
-                    success: function(response) {
+                    type: "POST", // HTTP method type
+                    url: action, // URL to the add_to_watchlist or remove_from_watchlist view
+                    data: form.serialize(), // Data to send in the request 
+                    success: function(response) { // Function to execute on successful response
+                         // Toggle between "Add to Watchlist" and "Remove from Watchlist" based on button text
                         if ($("#watchlist-btn").val() === "Remove from Watchlist") {
-                            $("#watchlist-btn").val("Add to Watchlist");
-                            $("#watchlist-form").attr("action", "{% url 'ReviewFlix:add_to_watchlist' %}");
+                            $("#watchlist-btn").val("Add to Watchlist"); // Update button text
+                            $("#watchlist-form").attr("action", "{% url 'ReviewFlix:add_to_watchlist' %}"); // Update form action
                         } else {
-                            $("#watchlist-btn").val("Remove from Watchlist");
-                            $("#watchlist-form").attr("action", "{% url 'ReviewFlix:remove_from_watchlist' %}");
+                            $("#watchlist-btn").val("Remove from Watchlist"); // Update button text
+                            $("#watchlist-form").attr("action", "{% url 'ReviewFlix:remove_from_watchlist' %}"); // Update form action
                         }
                     }
                 });
