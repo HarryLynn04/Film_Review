@@ -7,23 +7,49 @@
     Watchlist
 {% endblock %}
 
-{% block body_block %}
-    <h1>Welcome to the Watchlist Page</h1>
+{% block additional_css %}
+    <link rel="stylesheet" href="{% static 'css/watchlist.css' %}">
+    <link rel="stylesheet" href="{% static 'css/film.css' %}">
+{% endblock %}
 
-    <ul>
-        {% for entry in watchlist_entries %}
-            <li>
-                <a href="{% url 'ReviewFlix:Film' film_id=entry.Film.id %}">{{ entry.Film.Title }}</a>
-                <form method="post" action="{% url 'ReviewFlix:remove_from_watchlist' %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="film_id" value="{{ entry.Film.id }}">
-                    <input type="submit" value="Remove from Watchlist">
-                </form>
-            </li>
-        {% empty %}
-            <p>No movies in your watchlist.</p>
-        {% endfor %}
-    </ul>
+
+{% block body_block %}
+    <div class="container">
+
+        <h1 class="title">Welcome to the Watchlist Page</h1>
+
+        <div class="wrapper">
+            {% if watchlist_entries %}
+            <ul>
+                {% for entry in watchlist_entries %}
+                    <li>
+
+                        {% if entry.Film.image %}
+                            <img class="img_slide_bg" src="{{ entry.Film.image.url }}" alt="{{ entry.Film.Title }}"/>
+                        {% else %}
+                            <p>No image available.</p>
+                        {% endif %}
+                        <div class="text_wrapper">
+                            <a href="{% url 'ReviewFlix:Film' film_id=entry.Film.id %}">{{ entry.Film.Title }}</a>
+                            <p><strong>Genre:</strong> {{ entry.Film.Genre }}</p>
+                            <p><strong>Description:</strong> {{ entry.Film.Description }}</p>
+
+                            <form method="post" action="{% url 'ReviewFlix:remove_from_watchlist' %}">
+                                {% csrf_token %}
+                                <input class="btn" type="hidden" name="film_id" value="{{ entry.Film.id }}">
+                                <input class="btn" type="submit" value="Remove from Watchlist">
+                            </form>
+                        </div>
+                    </li>
+                {% empty %}
+                    <p>No movies in your watchlist.</p>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+        </div>
+
+    </div>
 {% endblock %}
 
 

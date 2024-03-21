@@ -1,0 +1,35 @@
+.container{
+    padding: 0 80px;
+}
+
+.title{
+    font-size: 45px;
+    text-align: center;
+}
+
+.wrapper li{
+    display: flex;
+    padding-bottom: 40px;
+}
+
+.text_wrapper{
+    padding: 0 70px;
+}
+
+.text_wrapper a{
+    font-size: 25px;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.2s linear;
+}
+
+.text_wrapper a:hover{
+    color: #78bcc0;
+}
+
+.img_slide_bg{
+    width: 40%;
+
+}
+
+

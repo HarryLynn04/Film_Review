@@ -74,12 +74,17 @@
    
     <footer>
       <ul>
-        {% if user.is_authenticated %}
-        {% if user.userprofile.isProducer%}
-        <li><a href="{% url 'ReviewFlix:AddAMovie' %}">Add a Movie</a></li>
-        {% endif %}
-        {% endif %}
-        <li><a href="{% url 'ReviewFlix:FAQ' %}">FAQs</a></li>
+
+        <div class="main_menu">
+          {% if user.is_authenticated %}
+          {% if user.userprofile.isProducer%}
+          <li><a href="{% url 'ReviewFlix:AddAMovie' %}">Add a Movie</a></li>
+          {% endif %}
+          {% endif %}
+          <li><a href="{% url 'ReviewFlix:FAQ' %}">FAQs</a></li>
+        </div>
+        
+        
       </ul>
     </footer>
 
