@@ -1,15 +1,13 @@
 from django.utils import timezone
 from django.contrib import messages
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse, JsonResponse, JsonResponse
 from Film_Review.forms import ReviewForm, UserForm, UserProfileForm, FilmForm
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
-from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from Film_Review.models import Film, Like, Review, Watchlist
 from django.db.models import Avg
-from django.contrib import messages
 
 
 
