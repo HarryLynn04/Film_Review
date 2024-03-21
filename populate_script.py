@@ -3,7 +3,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Film_Reviews_Project.settings')
 
 import django
 django.setup()
-from Film_Review.models import Film, UserProfile, Watchlist, Like, Review
+from Film_Review.models import Film, UserProfile, Like, Review
 from django.contrib.auth.models import User
 import random, datetime
 from django.utils import timezone
