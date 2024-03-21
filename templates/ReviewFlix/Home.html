@@ -21,8 +21,11 @@
 {% endblock %}
   
 
-
+{% block welcome_message %}
+    <li style="white-space: nowrap;" id="welcome-message">Hey, {{ user.username }}!</li>
+{% endblock %}
 {% block body_block %}
+
 
     <div class="wrapper">
         <div class="description">
@@ -100,17 +103,7 @@
 
 
 
-    <h1>Welcome to the HomePage</h1>
-    {% if user.is_authenticated %}
-        Hey {{ user.username }}!
-    {% else %}
-        Would you like to login or register?
-        <li><a href="{% url 'ReviewFlix:Register' %}">Register Here!</a></li>
-        <li><a href="{% url 'ReviewFlix:Login' %}">Login Here!</a></li>
-    {% endif %}
-    <p>Here you can find the latest reviews of the latest films</p>
-
-
+   
 
 {% endblock %}
 

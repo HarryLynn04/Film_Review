@@ -25,32 +25,39 @@
   <body>
     <header>
 
-        <img class="logo_img" src="{% static 'film_images/logo.png' %}"/>
+        
 
         <ul>
-          
-          <li><a href="{% url 'ReviewFlix:Home' %}">Homepage</a></li>
-          <li class="dropdown">
-            <a href="{% url 'ReviewFlix:Genres' %}">Genres</a>
-            <div class="dropdown-content">
-              <ul class="dropdown_list">
-                <li><a href="{% url 'ReviewFlix:Drama'%}">Drama</a></li>
-                <li><a href="{% url 'ReviewFlix:Comedy'%}">Comedy</a></li>
-                <li><a href="{% url 'ReviewFlix:Horror'%}">Horror</a></li>
-                <li><a href="{% url 'ReviewFlix:Thriller'%}">Thriller</a></li>
-                <li><a href="{% url 'ReviewFlix:Documentary'%}">Documentary</a></li>
-                <li><a href="{% url 'ReviewFlix:Animated'%}">Animated</a></li>
-              </ul>
-            </div>
-          </li>
-          {% if user.is_authenticated %}
-            <li><a href="{% url 'ReviewFlix:Watchlist' %}">Watchlist</a></li>
-            <li><a id="authorised_lst" href="{% url 'ReviewFlix:Logout' %}">Logout</a></li>
-          {% else %}
-          <div class ="authorised_lst">
-            <li><a href="{% url 'ReviewFlix:Register' %}">Register</a></li>
-            <li><a href="{% url 'ReviewFlix:Login' %}">Login</a></li>
+          <div class="wrapper_links">
+            <img class="logo_img" src="{% static 'film_images/logo.png' %}"/>
+            <li><a href="{% url 'ReviewFlix:Home' %}">Homepage</a></li>
+            <li class="dropdown">
+              <a href="{% url 'ReviewFlix:Genres' %}">Genres</a>
+              <div class="dropdown-content">
+                <ul class="dropdown_list">
+                  <li><a href="{% url 'ReviewFlix:Drama'%}">Drama</a></li>
+                  <li><a href="{% url 'ReviewFlix:Comedy'%}">Comedy</a></li>
+                  <li><a href="{% url 'ReviewFlix:Horror'%}">Horror</a></li>
+                  <li><a href="{% url 'ReviewFlix:Thriller'%}">Thriller</a></li>
+                  <li><a href="{% url 'ReviewFlix:Documentary'%}">Documentary</a></li>
+                  <li><a href="{% url 'ReviewFlix:Animated'%}">Animated</a></li>
+                </ul>
+              </div>
+            </li>
+            {% if user.is_authenticated %}
+              <li><a href="{% url 'ReviewFlix:Watchlist' %}">Watchlist</a></li>
           </div>
+          <div class="logout_wrapper">
+              {% block welcome_message %}{% endblock %}
+              <li><a id="authorised_lst" href="{% url 'ReviewFlix:Logout' %}">Logout</a></li>
+              {% else %}
+              <div class ="authorised_lst">
+                <li><a href="{% url 'ReviewFlix:Register' %}">Register</a></li>
+                <li><a href="{% url 'ReviewFlix:Login' %}">Login</a></li>
+              </div>
+          </div>
+          
+          
             
           {% endif %}
         </ul>
@@ -73,7 +80,7 @@
 
    
     <footer>
-      <ul>
+      <ul class="footer_menu">
 
         <div class="main_menu">
           {% if user.is_authenticated %}

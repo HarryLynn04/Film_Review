@@ -15,17 +15,35 @@ header ul {
   margin: 0;
   padding-left: 60px;
 }
+
+ul{
+ 
+}
+
+.wrapper_links{
+  display: flex;
+  align-content: center;
+  align-items: center;
+  /* margin-right: 340px; */
+}
+
+.logout_wrapper{
+  display: flex;
+  align-content: center;
+  align-items: center;
+  margin-left: 450px;
+}
+
 .logo_img{
     height: 20px;
     margin: 0;
+    margin-right: 30px;
 }
 
-#authorised_lst{
-    padding-left: 600px;
-}
 .authorised_lst{
-    padding-left: 600px;
+  margin-left: 550px;
 }
+
 
 header ul li {
   display: inline;
@@ -256,3 +274,7 @@ a:hover {
 }
 
 
+.footer_menu{
+  display: flex;
+  justify-content: center;
+}
