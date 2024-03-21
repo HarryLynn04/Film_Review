@@ -96,19 +96,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Event listener for clicking the like button
+            // Loop through each like button
             $(".like-btn").each(function () {
+                 // Get the review ID associated with the like button
                 var reviewId = $(this).data("review-id");
                 var likeButton = $(this);
+                // AJAX request to check if the user has already liked the review
                 $.ajax({
-                    url: "{% url 'ReviewFlix:check_like_status' %}",
-                    type: "GET",
-                    data: {
+                    url: "{% url 'ReviewFlix:check_like_status' %}", // URL to the check_like_status view
+                    type: "GET", // HTTP method type
+                    data: { // Data to send in the request
                         review_id: reviewId,
                     },
-                    dataType: "json",
-                    success: function (response) {
-                        if (response.status === "success") {
+                    dataType: "json", // Expected response data type
+                    success: function (response) {  // Function to execute on successful response
+                        if (response.status === "success") { // If the response indicates success
+                            // Update the like button text based on whether the user has liked the review
                             if (response.liked) {
                                 likeButton.text("Unlike");
                             } else {
@@ -123,7 +126,7 @@
                     }
                 });
             });
-
+            // Event listener for clicking the like button
             $(".like-btn").click(function () {
                 // Get the review ID associated with the clicked like button
                 var reviewId = $(this).data("review-id");
@@ -136,11 +139,12 @@
                         review_id: reviewId,
                         csrfmiddlewaretoken: "{{ csrf_token }}"
                     },
-                    dataType: "json",
-                    success: function (response) {
-                        if (response.status === "success") {
-                            var newLikes = response.new_likes;
-                            $("#likes-count-" + reviewId).text(newLikes);
+                    dataType: "json", // Expected response data type
+                    success: function (response) { // Function to execute on successful response
+                        if (response.status === "success") { // If the response indicates success
+                            var newLikes = response.new_likes; // New number of likes
+                            $("#likes-count-" + reviewId).text(newLikes); // Update the likes count in the HTML
+                            // Toggle between "Like" and "Unlike" based on the current button text
                             if (likeButton.text() === "Like") {
                                 likeButton.text("Unlike");
                             } else {
