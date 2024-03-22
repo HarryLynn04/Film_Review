@@ -307,7 +307,49 @@ def populate():
             'last_name': 'Doe',
             'password': 'password123',
             'is_producer': True
-        }
+        },
+        
+        {
+            'username': 'jim_smith',
+            'first_name': 'Jim',
+            'last_name': 'Smith',
+            'password': 'password123',
+            'is_producer': False
+        },
+        
+        {
+            'username': 'james_brown',
+            'first_name': 'James',
+            'last_name': 'Brown',
+            'password': 'password123',
+            'is_producer': True
+        },
+        
+        {
+            'username': 'louise_logan',
+            'first_name': 'Louise',
+            'last_name': 'Logan',
+            'password': 'password123',
+            'is_producer': False
+        },
+        
+        {
+            'username': 'lucy_lawson',
+            'first_name': 'Lucy',
+            'last_name': 'Lawson',
+            'password': 'password123',
+            'is_producer': True
+        },
+        
+        {
+            'username': 'jack_brown',
+            'first_name': 'Jack',
+            'last_name': 'Brown',
+            'password': 'password123',
+            'is_producer': False
+            
+        },
+        
         
  
     ]
